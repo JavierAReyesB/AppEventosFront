@@ -55,7 +55,7 @@ function editEventForm(eventId) {
 
       // Realizamos la solicitud PUT para editar el evento
       await fetchApi(
-        `http://localhost:5000/api/events/${eventId}`, // Usamos el eventId recibido
+        `${import.meta.env.VITE_APP_BACKEND_URL}/api/events/${eventId}`, // Usamos el eventId recibido
         'PUT', // Método PUT para editar
         formData,
         token,
