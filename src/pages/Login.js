@@ -52,14 +52,13 @@ function createLoginForm() {
         // Llamar a showToast para mostrar la notificación de éxito
         showToast('Inicio de sesión exitoso. ¡Bienvenido!', 'success', 'center')
 
-        if (formData.rememberMe) {
-          localStorage.setItem('token', response.token) // Guardar el token en localStorage si se selecciona "Recordar sesión"
-        } else {
-          sessionStorage.setItem('token', response.token) // Guardar el token en sessionStorage si no se selecciona
-        }
+        // Guardar el token en localStorage o sessionStorage
+        const storage = formData.rememberMe ? localStorage : sessionStorage
+        storage.setItem('token', response.token)
 
+        // Redirigir al perfil de usuario
         setTimeout(() => {
-          window.navigateTo('/register') // Redirigir al perfil de usuario
+          window.location.href = '/profile'
         }, 1000) // Redirigir después de 1 segundo
       } catch (error) {
         displayError(
