@@ -6,7 +6,9 @@ import { showToast } from '../utils/notification.js' // Importamos la función d
 // Función para obtener las reseñas del evento desde la API
 async function fetchReviews(eventId) {
   try {
-    return await fetchApi(`http://localhost:5000/api/reviews/event/${eventId}`)
+    return await fetchApi(
+      `${import.meta.env.VITE_APP_BACKEND_URL}/api/reviews/event/${eventId}`
+    )
   } catch (error) {
     console.error('Error:', error)
     showToast('Error al obtener las reseñas.', 'error', 'center')
@@ -20,7 +22,7 @@ async function addReview(eventId, reviewData) {
 
   try {
     await fetchApi(
-      `http://localhost:5000/api/reviews/`,
+      `${import.meta.env.VITE_APP_BACKEND_URL}/api/reviews/`,
       'POST',
       { ...reviewData, event: eventId },
       token
@@ -40,7 +42,7 @@ async function modifyReview(eventId, reviewId, reviewData) {
   const token = localStorage.getItem('token')
   try {
     await fetchApi(
-      `http://localhost:5000/api/reviews/${reviewId}`,
+      `${import.meta.env.VITE_APP_BACKEND_URL}/api/reviews/${reviewId}`,
       'PUT',
       reviewData,
       token
@@ -63,7 +65,7 @@ async function deleteReview(reviewId, reviewElement, eventId) {
 
   try {
     await fetchApi(
-      `http://localhost:5000/api/reviews/${reviewId}`,
+      `${import.meta.env.VITE_APP_BACKEND_URL}/api/reviews/${reviewId}`,
       'DELETE',
       null,
       token
