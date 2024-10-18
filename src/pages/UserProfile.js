@@ -73,14 +73,32 @@ function createUserProfile() {
 
   // Añadimos la lista de eventos asistidos en el perfil
   ;(async () => {
-    const attendedEventsContainer = await createAttendedEvents() // Llamamos a la función que crea la lista de eventos asistidos
-    userProfileContainer.appendChild(attendedEventsContainer)
+    try {
+      const attendedEventsContainer = await createAttendedEvents() // Llamamos a la función que crea la lista de eventos asistidos
+      userProfileContainer.appendChild(attendedEventsContainer)
+    } catch (error) {
+      console.error('Error al cargar eventos asistidos:', error)
+      showToast(
+        'Error al cargar los eventos asistidos. Inténtalo de nuevo.',
+        'error',
+        'center'
+      )
+    }
   })()
 
   // Añadimos la lista de eventos futuros en el perfil
   ;(async () => {
-    const upcomingEventsContainer = await createUpcomingEvents() // Llamamos a la función que crea la lista de eventos futuros
-    userProfileContainer.appendChild(upcomingEventsContainer)
+    try {
+      const upcomingEventsContainer = await createUpcomingEvents() // Llamamos a la función que crea la lista de eventos futuros
+      userProfileContainer.appendChild(upcomingEventsContainer)
+    } catch (error) {
+      console.error('Error al cargar eventos futuros:', error)
+      showToast(
+        'Error al cargar los eventos futuros. Inténtalo de nuevo.',
+        'error',
+        'center'
+      )
+    }
   })()
 
   return userProfileContainer
