@@ -1,4 +1,4 @@
-import '../styles/card.css'
+import '../styles/Card.css'
 import '../styles/EventList.css'
 import createLoader from '../components/Loader.js'
 import fetchApi from '../services/apiService.js'
