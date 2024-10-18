@@ -1,0 +1,12 @@
+.attended-events-container {
+  padding: var(--spacing-lg); /* Usar espaciado grande */
+  border: 1px solid var(--neutral-dark); /* Borde en color neutro oscuro */
+  border-radius: var(--radius-md); /* Bordes redondeados medianos */
+  margin-top: var(--spacing-md); /* Margen superior medio */
+  background-color: var(--neutral-light); /* Fondo en color neutro claro */
+}
+
+.event-item {
+  padding: var(--spacing-sm); /* Espaciado pequeño */
+  border-bottom: 1px solid var(--neutral-dark); /* Borde inferior en color neutro oscuro */
+}

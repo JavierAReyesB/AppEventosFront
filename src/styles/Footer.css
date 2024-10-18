@@ -1,0 +1,91 @@
+.footer {
+  width: 100%;
+  background-color: var(
+    --primary-dark
+  ); /* Uso de variable para el color de fondo */
+  color: var(--neutral-light); /* Uso de variable para el color del texto */
+  padding: var(--spacing-lg) var(--spacing-md); /* Uso de variables para el espaciado interno */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* Sombra en la parte superior del footer */
+  margin-top: auto;
+  text-align: center;
+}
+
+.footer-sections {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+}
+
+.footer-section {
+  flex: 1;
+  padding: 0 var(--spacing-md);
+}
+
+.footer-section h4 {
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.2rem;
+  color: var(--accent-light);
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: var(--spacing-xs);
+}
+
+.footer-section ul li a {
+  text-decoration: none;
+  color: var(--neutral-light);
+}
+
+.footer-section ul li a:hover {
+  color: var(--secondary-light); /* Cambio de color al hacer hover */
+}
+
+.footer-app {
+  text-align: center; /* Centrado de la sección de la aplicación */
+  margin-bottom: var(--spacing-lg);
+}
+
+.footer-app .centered-text {
+  text-align: center; /* Centrar el texto */
+  margin-bottom: var(
+    --spacing-md
+  ); /* Espaciado entre el texto y el pie de página */
+}
+
+.footer p {
+  color: var(--neutral-light);
+  margin-top: var(--spacing-md);
+}
+
+.footer-rights {
+  text-align: center; /* Centra los derechos reservados */
+  color: var(--neutral-light); /* Ajuste de color para el texto */
+  margin-top: var(--spacing-md);
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 768px) {
+  .footer-sections {
+    flex-direction: column; /* Cambia la disposición a columna */
+    align-items: center;
+  }
+
+  .footer-section {
+    margin-bottom: var(--spacing-lg); /* Añadir espacio entre las secciones */
+    text-align: center; /* Centrar los enlaces en pantallas más pequeñas */
+  }
+
+  .footer-section h4,
+  .footer-section ul li a {
+    font-size: 1rem; /* Reducir un poco el tamaño de los textos en móviles */
+  }
+
+  .footer-rights {
+    font-size: 0.9rem; /* Reducir el tamaño del texto de derechos reservados */
+  }
+}

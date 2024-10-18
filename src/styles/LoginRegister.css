@@ -1,0 +1,77 @@
+/* Estilos generales para el formulario de inicio de sesión y registro */
+.form-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 100px auto; /* Centrar el formulario en la pantalla con un margen superior */
+  padding: 20px;
+  background-color: var(--neutral-light);
+  border-radius: var(--radius-md);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.form-container h1 {
+  text-align: center;
+  color: var(--primary-dark);
+  margin-bottom: var(--spacing-md);
+}
+
+.form-container input[type='text'],
+.form-container input[type='email'],
+.form-container input[type='password'] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: var(--spacing-sm);
+  border: 1px solid var(--primary-dark);
+  border-radius: var(--radius-sm);
+}
+
+.form-container input[type='checkbox'] {
+  margin-right: 10px;
+  transform: scale(1.2); /* Agrandar el checkbox */
+}
+
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--accent-dark);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.form-container button:hover {
+  background-color: var(--accent-light);
+}
+
+.form-container a {
+  display: block;
+  text-align: center;
+  margin-top: var(--spacing-md);
+  color: var(--accent-dark);
+}
+
+/* Estilos específicos para el label del checkbox */
+.form-container label {
+  display: flex;
+  align-items: center; /* Alinear el checkbox y el texto */
+  font-size: 14px;
+  color: var(--primary-dark);
+  margin-bottom: var(--spacing-sm);
+  justify-content: center; /* Centrar tanto el checkbox como el texto */
+  cursor: pointer;
+}
+
+.form-container input[type='checkbox']:checked {
+  accent-color: var(
+    --accent-dark
+  ); /* Color del checkbox cuando está seleccionado */
+}
+
+/* Ajuste para hacer que el texto esté centrado sobre el checkbox */
+.form-container label .checkbox-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Espaciado entre el checkbox y el texto */
+}

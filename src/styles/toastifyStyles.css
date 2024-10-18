@@ -1,0 +1,50 @@
+/* toastifyStyles.css */
+.toastify {
+  border-radius: var(
+    --radius-md
+  ) !important; /* Usar variable para bordes redondeados */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1) !important; /* Mantener la sombra */
+  padding: var(--spacing-md) !important; /* Usar variable de espaciado medio */
+  color: var(
+    --neutral-light
+  ) !important; /* Usar color neutro claro para el texto */
+  font-size: 1rem !important; /* Tamaño de fuente estándar */
+}
+
+.toastify--success {
+  background: linear-gradient(
+    to right,
+    var(--accent-dark),
+    #66bb6a
+  ) !important; /* Acento oscuro y verde claro */
+}
+
+.toastify--error {
+  background: linear-gradient(
+    to right,
+    var(--secondary-dark),
+    #e57373
+  ) !important; /* Color secundario oscuro y rojo claro */
+}
+
+.toastify--info {
+  background: linear-gradient(
+    to right,
+    var(--accent-light),
+    #64b5f6
+  ) !important; /* Acento claro (morado) y azul claro */
+}
+
+.toastify--warning {
+  background: linear-gradient(
+    to right,
+    var(--secondary-light),
+    #ffb74d
+  ) !important; /* Color secundario claro (naranja) y amarillo claro */
+}
+
+.toastify-close {
+  color: var(
+    --neutral-light
+  ) !important; /* Usar color neutro claro para el botón de cierre */
+}

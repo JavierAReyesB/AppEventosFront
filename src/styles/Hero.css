@@ -1,0 +1,81 @@
+.hero-container {
+  width: 100%;
+  height: 400px;
+  position: relative; /* Para que el texto se superponga a la imagen */
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--neutral-light); /* Fondo neutral claro */
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Mantiene la proporción de la imagen */
+  object-position: center; /* Asegura que la imagen también tenga bordes redondeados */
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Centra el texto */
+  text-align: center;
+  color: var(--primary-light); /* Texto en color claro */
+  padding: var(--spacing-sm); /* Espaciado pequeño para el texto */
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+  color: var(--secondary-light); /* Color secundario claro para el título */
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-top: var(
+    --spacing-xs
+  ); /* Usar espaciado extra pequeño para el margen superior */
+  color: var(--primary-light); /* Mantener el texto claro para el subtítulo */
+}
+
+/* Responsive para pantallas pequeñas */
+@media (max-width: 768px) {
+  .hero-container {
+    height: 300px; /* Reducimos la altura para pantallas móviles */
+  }
+
+  .hero-title {
+    font-size: 2rem; /* Reducimos el tamaño del título en pantallas pequeñas */
+  }
+
+  .hero-subtitle {
+    font-size: 1rem; /* Reducimos el tamaño del subtítulo en pantallas pequeñas */
+  }
+
+  .hero-text {
+    padding: var(
+      --spacing-xs
+    ); /* Reducimos el padding para pantallas pequeñas */
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-container {
+    height: 250px; /* Ajustamos la altura para pantallas aún más pequeñas */
+  }
+
+  .hero-title {
+    font-size: 1.8rem; /* Reducimos aún más el tamaño del título para pantallas pequeñas */
+  }
+
+  .hero-subtitle {
+    font-size: 0.9rem; /* Reducimos aún más el tamaño del subtítulo */
+  }
+
+  .hero-text {
+    padding: var(--spacing-xs); /* Mantener el padding pequeño */
+  }
+}
