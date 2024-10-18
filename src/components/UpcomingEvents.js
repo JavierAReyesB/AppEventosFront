@@ -7,7 +7,7 @@ async function fetchUpcomingEvents() {
 
   try {
     const events = await fetchApi(
-      'http://localhost:5000/api/users/me/upcoming-events',
+      `${import.meta.env.VITE_APP_BACKEND_URL}/api/users/me/upcoming-events`,
       'GET',
       null,
       token
