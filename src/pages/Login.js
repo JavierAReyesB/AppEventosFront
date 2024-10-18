@@ -59,7 +59,7 @@ function createLoginForm() {
         }
 
         setTimeout(() => {
-          window.location.href = '/profile' // Redirigir al perfil de usuario
+          window.navigateTo('/register') // Redirigir al perfil de usuario
         }, 1000) // Redirigir después de 1 segundo
       } catch (error) {
         displayError(
