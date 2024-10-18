@@ -8,7 +8,10 @@ import { showToast } from '../utils/notification.js' // Importamos la función d
 // Función para obtener los detalles de un evento desde la API
 async function fetchEventDetails(eventId) {
   try {
-    return await fetchApi(`http://localhost:5000/api/events/${eventId}`, 'GET') // Usamos fetchApi
+    return await fetchApi(
+      `${import.meta.env.VITE_APP_BACKEND_URL}/api/events/${eventId}`, // Usamos fetchApi
+      'GET'
+    )
   } catch (error) {
     console.error('Error al obtener los detalles del evento:', error)
     showToast('Error al cargar los detalles del evento.', 'error', 'center')
@@ -20,7 +23,7 @@ async function fetchEventDetails(eventId) {
 async function attendEvent(eventId, token, errorMessageElement) {
   try {
     await fetchApi(
-      `http://localhost:5000/api/events/${eventId}/attend`,
+      `${import.meta.env.VITE_APP_BACKEND_URL}/api/events/${eventId}/attend`,
       'POST',
       null,
       token
@@ -130,7 +133,7 @@ async function createEventDetails(eventId) {
         if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
           try {
             await fetchApi(
-              `http://localhost:5000/api/events/${eventId}`,
+              `${import.meta.env.VITE_APP_BACKEND_URL}/api/events/${eventId}`,
               'DELETE',
               null,
               token
