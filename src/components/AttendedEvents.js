@@ -6,7 +6,7 @@ import fetchApi from '../services/apiService' // Importamos la función reutiliz
 async function fetchAttendedEvents(token) {
   try {
     const events = await fetchApi(
-      `http://localhost:5000/api/users/me/attended-events`,
+      `${import.meta.env.VITE_APP_BACKEND_URL}/api/users/me/attended-events`, // Usamos la variable de entorno para la URL
       'GET',
       null, // No body required for GET requests
       token
