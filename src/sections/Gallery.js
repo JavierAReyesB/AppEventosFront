@@ -5,7 +5,10 @@ async function createGallery() {
   const container = document.createElement('div')
   container.classList.add('gallery-container')
 
-  const events = await fetchApi('http://localhost:5000/api/events', 'GET') // Llamada a la API para obtener los eventos
+  const events = await fetchApi(
+    `${import.meta.env.VITE_APP_BACKEND_URL}/api/events`,
+    'GET'
+  ) // Llamada a la API para obtener los eventos
 
   if (events.length === 0) {
     const noImageMessage = document.createElement('p')
