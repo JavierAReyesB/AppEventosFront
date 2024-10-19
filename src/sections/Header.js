@@ -5,7 +5,7 @@ import createUserProfile from '../pages/UserProfile.js' // Asegúrate de tener l
 import createHome from '../pages/Home.js'
 import createLoginForm from '../pages/Login.js' // Asegúrate de que la ruta sea correcta
 import createRegisterForm from '../pages/Register.js' // Asegúrate de que la ruta sea correcta
-import createGalleryPage from './pages/GalleryPage.js' // Asegúrate de importar la función correcta
+import createGalleryPage from './pages/GalleryPage.js'
 
 function createHeader() {
   const header = document.createElement('header')
