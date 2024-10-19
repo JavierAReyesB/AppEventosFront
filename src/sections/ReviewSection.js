@@ -3,10 +3,13 @@ import fetchApi from '../services/apiService' // Importamos la función fetchApi
 import { createForm } from '../components/Form.js' // Importamos el nuevo formulario reutilizable
 import { showToast } from '../utils/notification.js' // Importamos la función de notificación
 
+// Obtener la URL del backend desde las variables de entorno
+const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
+
 // Función para obtener las reseñas del evento desde la API
 async function fetchReviews(eventId) {
   try {
-    return await fetchApi(`http://localhost:5000/api/reviews/event/${eventId}`)
+    return await fetchApi(`${backendUrl}/api/reviews/event/${eventId}`)
   } catch (error) {
     console.error('Error:', error)
     showToast('Error al obtener las reseñas.', 'error', 'center')
@@ -20,7 +23,7 @@ async function addReview(eventId, reviewData) {
 
   try {
     await fetchApi(
-      `http://localhost:5000/api/reviews/`,
+      `${backendUrl}/api/reviews/`, // Usar backendUrl aquí
       'POST',
       { ...reviewData, event: eventId },
       token
@@ -40,7 +43,7 @@ async function modifyReview(eventId, reviewId, reviewData) {
   const token = localStorage.getItem('token')
   try {
     await fetchApi(
-      `http://localhost:5000/api/reviews/${reviewId}`,
+      `${backendUrl}/api/reviews/${reviewId}`, // Usar backendUrl aquí
       'PUT',
       reviewData,
       token
@@ -63,7 +66,7 @@ async function deleteReview(reviewId, reviewElement, eventId) {
 
   try {
     await fetchApi(
-      `http://localhost:5000/api/reviews/${reviewId}`,
+      `${backendUrl}/api/reviews/${reviewId}`, // Usar backendUrl aquí
       'DELETE',
       null,
       token

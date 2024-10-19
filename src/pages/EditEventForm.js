@@ -4,6 +4,9 @@ import { createForm } from '../components/Form'
 import { displayError, clearError } from '../utils/errorHandler'
 import { showToast } from '../utils/notification' // Importar la función de notificación
 
+// Obtener la URL del backend desde las variables de entorno
+const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
+
 function editEventForm(eventId) {
   const container = document.createElement('div')
   container.classList.add('edit-event-container')
@@ -55,7 +58,7 @@ function editEventForm(eventId) {
 
       // Realizamos la solicitud PUT para editar el evento
       await fetchApi(
-        `http://localhost:5000/api/events/${eventId}`, // Usamos el eventId recibido
+        `${backendUrl}/api/events/${eventId}`, // Usamos el eventId y la URL del backend
         'PUT', // Método PUT para editar
         formData,
         token,

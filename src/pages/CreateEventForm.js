@@ -4,6 +4,9 @@ import { createForm } from '../components/Form'
 import { displayError, clearError } from '../utils/errorHandler'
 import { showToast } from '../utils/notification' // Importamos la función de notificación
 
+// Obtener la URL del backend desde las variables de entorno
+const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
+
 function createEventForm() {
   const container = document.createElement('div')
   container.classList.add('create-event-container')
@@ -52,9 +55,9 @@ function createEventForm() {
         console.log(`${key}: ${value}`) // Log para verificar el contenido de FormData
       }
 
-      // Enviar los datos al backend
+      // Enviar los datos al backend usando la URL dinámica
       await fetchApi(
-        'http://localhost:5000/api/events',
+        `${backendUrl}/api/events`, // Usar la URL del backend
         'POST',
         formData,
         token,

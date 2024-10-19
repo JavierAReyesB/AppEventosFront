@@ -2,13 +2,16 @@ import '../styles/AttendedEvents.css' // Asegúrate de tener un archivo CSS para
 import createLoader from '../components/Loader.js' // Importar el componente del loader
 import fetchApi from '../services/apiService' // Importamos la función reutilizable fetchApi
 
+// Obtener la URL del backend desde las variables de entorno
+const backendUrl = import.meta.env.VITE_APP_BACKEND_URL // Definir backendUrl
+
 // Función para obtener los eventos asistidos por el usuario desde la API
 async function fetchAttendedEvents(token) {
   try {
     const events = await fetchApi(
-      `http://localhost:5000/api/users/me/attended-events`,
+      `${backendUrl}/api/users/me/attended-events`, // Usar la URL dinámica
       'GET',
-      null, // No body required for GET requests
+      null, // No se requiere body para peticiones GET
       token
     )
     return events

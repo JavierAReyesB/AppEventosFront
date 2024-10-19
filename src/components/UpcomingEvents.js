@@ -2,12 +2,15 @@ import '../styles/UpcomingEvents.css'
 import fetchApi from '../services/apiService'
 import { showToast } from '../utils/notification' // Importar la función de notificación
 
+// Obtener la URL del backend desde las variables de entorno
+const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
+
 async function fetchUpcomingEvents() {
   const token = localStorage.getItem('token')
 
   try {
     const events = await fetchApi(
-      'http://localhost:5000/api/users/me/upcoming-events',
+      `${backendUrl}/api/users/me/upcoming-events`, // Usamos la URL dinámica del backend
       'GET',
       null,
       token
