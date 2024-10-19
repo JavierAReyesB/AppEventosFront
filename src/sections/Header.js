@@ -143,8 +143,9 @@ function handleRouting(path) {
     main.appendChild(userProfile)
   } else if (path === '/gallery') {
     console.log('Cargando galería de eventos')
-    createGallery().then((galleryPage) => {
-      main.appendChild(galleryPage)
+    createGallery().then((gallery) => {
+      // Corregido para usar createGallery()
+      main.appendChild(gallery)
     })
   } else if (path === '/') {
     console.log('Cargando página de inicio')
