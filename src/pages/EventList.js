@@ -3,6 +3,7 @@ import '../styles/EventList.css'
 import createLoader from '../components/Loader.js'
 import fetchApi from '../services/apiService.js'
 import { showToast } from '../utils/notification.js'
+import { displayError, clearError } from '../utils/errorHandler.js' // Añadimos el errorHandler
 import {
   filterEventsByLocation,
   sortEventsByDate
@@ -85,6 +86,11 @@ async function fetchEvents() {
     return await fetchApi(`${backendUrl}/api/events`, 'GET')
   } catch (error) {
     console.error('Error al obtener los eventos:', error)
+    displayError(
+      'Error al cargar los eventos. Intente más tarde.',
+      document.body,
+      'network'
+    )
     showToast(
       'Error al cargar los eventos. Intente más tarde.',
       'error',
