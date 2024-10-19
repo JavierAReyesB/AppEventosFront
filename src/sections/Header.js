@@ -123,15 +123,20 @@ function createNavLink(href, text) {
 }
 
 function handleRouting(path) {
-  console.log(`Navegando a: ${path}`) // Añade esta línea para verificar
   const app = document.getElementById('app-container')
-  app.innerHTML = ''
+  app.innerHTML = '' // Limpiamos el contenido anterior
 
   if (path === '/events') {
     console.log('Cargando vista de eventos')
     createEventList().then((eventList) => {
       app.appendChild(eventList)
+      console.log(app.innerHTML) // Verificar el contenido
     })
+  } else if (path === '/gallery') {
+    console.log('Cargando galería')
+    const galleryPage = createGalleryPage()
+    app.appendChild(galleryPage)
+    console.log(app.innerHTML) // Verificar el contenido
   } else if (path === '/profile') {
     console.log('Cargando perfil del usuario')
     const userProfile = createUserProfile()
