@@ -67,10 +67,7 @@ function getUniqueLocations(events) {
 
 async function fetchEvents() {
   try {
-    return await fetchApi(
-      `${import.meta.env.VITE_APP_BACKEND_URL}/api/events`,
-      'GET'
-    )
+    return await fetchApi('http://localhost:5000/api/events', 'GET')
   } catch (error) {
     console.error('Error al obtener los eventos:', error)
 

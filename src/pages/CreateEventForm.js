@@ -54,7 +54,7 @@ function createEventForm() {
 
       // Enviar los datos al backend
       await fetchApi(
-        `${import.meta.env.VITE_APP_BACKEND_URL}/api/events`, // Usar la variable de entorno
+        'http://localhost:5000/api/events',
         'POST',
         formData,
         token,

@@ -1,13 +1,10 @@
 import fetchApi from './apiService' // Asegúrate de importar la función fetchApi
 
-// Obtener la URL del backend desde las variables de entorno
-const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
-
 // Función para registrar usuario
 export const registerUser = async (userData) => {
   try {
     const response = await fetchApi(
-      `${backendUrl}/api/users/register`, // Usar la URL dinámica
+      'http://localhost:5000/api/users/register',
       'POST',
       userData
     )
@@ -22,7 +19,7 @@ export const registerUser = async (userData) => {
 export const loginUser = async (loginData) => {
   try {
     const response = await fetchApi(
-      `${backendUrl}/api/users/login`, // Usar la URL dinámica
+      'http://localhost:5000/api/users/login',
       'POST',
       loginData
     )
@@ -38,7 +35,7 @@ export const getUserProfile = async (userId) => {
   try {
     const token = localStorage.getItem('token') // Recuperar el token del localStorage
     const response = await fetchApi(
-      `${backendUrl}/api/users/${userId}`, // Usar la URL dinámica
+      `http://localhost:5000/api/users/${userId}`,
       'GET',
       null,
       token
