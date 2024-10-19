@@ -2,14 +2,14 @@ import '../styles/Card.css'
 import '../styles/EventList.css'
 import createLoader from '../components/Loader.js'
 import fetchApi from '../services/apiService.js'
-import { showToast } from '../utils/notification.js' // Importamos la función de notificación
+import { showToast } from '../utils/notification.js'
 import {
   filterEventsByLocation,
   sortEventsByDate
-} from '../utils/filterAndSort.js' // Importamos las funciones de filtro y ordenación
+} from '../utils/filterAndSort.js'
 
 // Obtener la URL del backend desde las variables de entorno
-const backendUrl = import.meta.env.VITE_APP_BACKEND_URL // Esta línea va aquí, justo después de las importaciones
+const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
 
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' }
@@ -52,7 +52,10 @@ function createCard(event) {
   detailButton.textContent = 'Ver detalles'
   detailButton.classList.add('card-button')
   detailButton.addEventListener('click', () => {
-    window.navigateTo(`/events/${event._id}`)
+    // Cambia la URL sin recargar la página
+    window.history.pushState({}, '', `/events/${event._id}`)
+    // Llama a la función para cargar los detalles del evento
+    loadEventDetails(event._id)
   })
   cardContent.appendChild(detailButton)
 
@@ -65,17 +68,14 @@ function createCard(event) {
 // Función para obtener las ubicaciones únicas de los eventos
 function getUniqueLocations(events) {
   const locations = events.map((event) => event.location)
-  return [...new Set(locations)] // Usamos Set para eliminar duplicados
+  return [...new Set(locations)]
 }
 
 async function fetchEvents() {
   try {
-    const backendUrl = import.meta.env.VITE_APP_BACKEND_URL // Obtener la URL del backend desde variables de entorno
-    return await fetchApi(`${backendUrl}/api/events`, 'GET') // Usar la URL dinámica
+    return await fetchApi(`${backendUrl}/api/events`, 'GET')
   } catch (error) {
     console.error('Error al obtener los eventos:', error)
-
-    // Mostrar una notificación si ocurre un error al obtener los eventos
     showToast(
       'Error al cargar los eventos. Intente más tarde.',
       'error',
@@ -120,17 +120,14 @@ async function createEventList() {
   const loader = createLoader()
   document.body.appendChild(loader)
 
-  await new Promise((resolve) => setTimeout(resolve, 2000))
   let events = await fetchEvents()
 
   document.body.removeChild(loader)
 
-  // Si no hay eventos, mostramos una notificación
   if (events.length === 0) {
     showToast('No se encontraron eventos.', 'info', 'center')
   }
 
-  // Generar las opciones del filtro de ubicación basadas en los eventos
   const uniqueLocations = getUniqueLocations(events)
   locationSelect.innerHTML = '<option value="">Filtrar por ubicación</option>'
   uniqueLocations.forEach((location) => {
@@ -140,9 +137,8 @@ async function createEventList() {
     locationSelect.appendChild(option)
   })
 
-  // Función para renderizar eventos en la lista
   const renderEvents = (filteredEvents) => {
-    eventList.innerHTML = '' // Limpiar la lista actual
+    eventList.innerHTML = ''
     if (filteredEvents.length === 0) {
       const emptyMessage = document.createElement('p')
       emptyMessage.textContent = 'No hay eventos disponibles en este momento.'
@@ -155,11 +151,9 @@ async function createEventList() {
     }
   }
 
-  // Filtrar y renderizar eventos cuando se ingrese texto o cambien los filtros
   const applyFilters = () => {
     let filteredEvents = events
 
-    // Filtro de búsqueda
     const searchQuery = searchInput.value.toLowerCase()
     if (searchQuery) {
       filteredEvents = filteredEvents.filter(
@@ -169,13 +163,11 @@ async function createEventList() {
       )
     }
 
-    // Filtro por ubicación
     const selectedLocation = locationSelect.value
     if (selectedLocation) {
       filteredEvents = filterEventsByLocation(filteredEvents, selectedLocation)
     }
 
-    // Ordenar por fecha
     const selectedSortOrder = dateSortSelect.value
     filteredEvents = sortEventsByDate(
       filteredEvents,
@@ -185,16 +177,21 @@ async function createEventList() {
     renderEvents(filteredEvents)
   }
 
-  // Escuchar cambios en los inputs y filtros
   searchInput.addEventListener('input', applyFilters)
   locationSelect.addEventListener('change', applyFilters)
   dateSortSelect.addEventListener('change', applyFilters)
 
-  // Renderizar la lista inicial de eventos
   renderEvents(events)
 
   container.appendChild(eventList)
   return container
+}
+
+// Función para cargar los detalles de un evento
+function loadEventDetails(eventId) {
+  // Aquí puedes definir la lógica para cargar los detalles del evento
+  console.log(`Cargando detalles del evento: ${eventId}`)
+  // Podrías realizar otra llamada a `fetchApi` para obtener los detalles del evento
 }
 
 export default createEventList
