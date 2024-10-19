@@ -1,51 +1,47 @@
-import fetchApi from './apiService' // Asegúrate de importar la función fetchApi
+import fetchApi from './apiService'
 
-// Obtener la URL del backend desde las variables de entorno
 const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
 
-// Función para registrar usuario
 export const registerUser = async (userData) => {
   try {
     const response = await fetchApi(
-      `${backendUrl}/api/users/register`, // Usar la URL del backend desde las variables de entorno
+      `${backendUrl}/api/users/register`,
       'POST',
       userData
     )
-    return response // Retornar la respuesta del servidor
+    return response
   } catch (error) {
     console.error(error)
-    throw error // Lanzar el error para manejarlo en el componente
+    throw error
   }
 }
 
-// Función para iniciar sesión de usuario
 export const loginUser = async (loginData) => {
   try {
     const response = await fetchApi(
-      `${backendUrl}/api/users/login`, // Usar la URL del backend desde las variables de entorno
+      `${backendUrl}/api/users/login`,
       'POST',
       loginData
     )
-    return response // Retornar la respuesta del servidor
+    return response
   } catch (error) {
     console.error(error)
-    throw error // Lanzar el error para manejarlo en el componente
+    throw error
   }
 }
 
-// Función para obtener el perfil del usuario con manejo de expiración de token
 export const getUserProfile = async (userId) => {
   try {
-    const token = localStorage.getItem('token') // Recuperar el token del localStorage
+    const token = localStorage.getItem('token')
     const response = await fetchApi(
-      `${backendUrl}/api/users/${userId}`, // Usar la URL del backend desde las variables de entorno
+      `${backendUrl}/api/users/${userId}`,
       'GET',
       null,
       token
-    ) // Aquí pasamos el token
-    return response // Retornar los datos del perfil
+    )
+    return response
   } catch (error) {
     console.error(error)
-    throw error // Lanzar el error para manejarlo en el componente
+    throw error
   }
 }
