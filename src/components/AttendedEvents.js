@@ -1,17 +1,15 @@
-import '../styles/AttendedEvents.css' // Asegúrate de tener un archivo CSS para los estilos
-import createLoader from '../components/Loader.js' // Importar el componente del loader
-import fetchApi from '../services/apiService' // Importamos la función reutilizable fetchApi
+import '../styles/AttendedEvents.css'
+import createLoader from '../components/Loader.js'
+import fetchApi from '../services/apiService'
 
-// Obtener la URL del backend desde las variables de entorno
-const backendUrl = import.meta.env.VITE_APP_BACKEND_URL // Definir backendUrl
+const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
 
-// Función para obtener los eventos asistidos por el usuario desde la API
 async function fetchAttendedEvents(token) {
   try {
     const events = await fetchApi(
-      `${backendUrl}/api/users/me/attended-events`, // Usar la URL dinámica
+      `${backendUrl}/api/users/me/attended-events`,
       'GET',
-      null, // No se requiere body para peticiones GET
+      null,
       token
     )
     return events
@@ -21,7 +19,6 @@ async function fetchAttendedEvents(token) {
   }
 }
 
-// Función para crear la lista de eventos asistidos
 async function createAttendedEvents() {
   const container = document.createElement('div')
   container.classList.add('attended-events-container')
@@ -30,16 +27,13 @@ async function createAttendedEvents() {
   title.textContent = 'Mis Eventos Asistidos'
   container.appendChild(title)
 
-  const token = localStorage.getItem('token') // Obtenemos el token del usuario
+  const token = localStorage.getItem('token')
 
-  // Crear y mostrar el loader
-  const loader = createLoader() // Definir el loader correctamente aquí
+  const loader = createLoader()
   container.appendChild(loader)
 
-  // Obtenemos la lista de eventos asistidos
   const events = await fetchAttendedEvents(token)
 
-  // Ocultar el loader una vez que los eventos se carguen
   container.removeChild(loader)
 
   if (events.length === 0) {
@@ -47,7 +41,7 @@ async function createAttendedEvents() {
     emptyMessage.textContent = 'No has asistido a ningún evento todavía.'
     container.appendChild(emptyMessage)
   } else {
-    const eventsList = document.createElement('ul') // Lista de eventos
+    const eventsList = document.createElement('ul')
 
     events.forEach((event) => {
       const eventItem = document.createElement('li')

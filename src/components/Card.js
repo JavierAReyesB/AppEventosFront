@@ -1,16 +1,13 @@
-// Función para crear un botón genérico
 function createButton({ text, onClick, className = '' }) {
   const button = document.createElement('button')
   button.textContent = text
-  button.classList.add('custom-button', className) // Clase base + clases opcionales
+  button.classList.add('custom-button', className)
 
-  // Añadir el evento de clic
   button.addEventListener('click', onClick)
 
   return button
 }
 
-// Función para crear una tarjeta
 function createCard({
   title,
   description,
@@ -20,7 +17,7 @@ function createCard({
   className = ''
 }) {
   const card = document.createElement('div')
-  card.classList.add('custom-card', className) // Clase base + clases opcionales
+  card.classList.add('custom-card', className)
 
   const img = document.createElement('img')
   img.src = imageUrl
@@ -35,7 +32,7 @@ function createCard({
   const button = createButton({
     text: buttonText,
     onClick: onButtonClick,
-    className: 'card-button' // Clase para el botón dentro de la tarjeta
+    className: 'card-button'
   })
 
   card.appendChild(img)
@@ -45,20 +42,3 @@ function createCard({
 
   return card
 }
-
-// Ejemplo de uso
-const cardContainer = document.getElementById('card-container') // Asegúrate de tener un contenedor en tu HTML
-
-const cardData = {
-  title: 'Título de la Tarjeta',
-  description: 'Esta es una descripción de la tarjeta.',
-  imageUrl: 'https://via.placeholder.com/150', // Cambia esto a la URL de tu imagen
-  buttonText: 'Acción',
-  onButtonClick: () => {
-    alert('Botón de la tarjeta clickeado!')
-  }
-}
-
-// Crear la tarjeta y añadirla al contenedor
-const cardElement = createCard(cardData)
-cardContainer.appendChild(cardElement)

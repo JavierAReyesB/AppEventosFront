@@ -1,8 +1,7 @@
 import '../styles/UpcomingEvents.css'
 import fetchApi from '../services/apiService'
-import { showToast } from '../utils/notification' // Importar la función de notificación
+import { showToast } from '../utils/notification'
 
-// Obtener la URL del backend desde las variables de entorno
 const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
 
 async function fetchUpcomingEvents() {
@@ -10,7 +9,7 @@ async function fetchUpcomingEvents() {
 
   try {
     const events = await fetchApi(
-      `${backendUrl}/api/users/me/upcoming-events`, // Usamos la URL dinámica del backend
+      `${backendUrl}/api/users/me/upcoming-events`,
       'GET',
       null,
       token
@@ -37,8 +36,6 @@ async function createUpcomingEvents() {
       const emptyMessage = document.createElement('p')
       emptyMessage.textContent = 'No tienes eventos próximos.'
       container.appendChild(emptyMessage)
-
-      // Mostrar notificación de que no hay eventos próximos
       showToast('No tienes eventos próximos.', 'info', 'center')
     } else {
       upcomingEvents.forEach((event) => {
@@ -49,16 +46,12 @@ async function createUpcomingEvents() {
         ).toLocaleDateString()}`
         container.appendChild(eventItem)
       })
-
-      // Mostrar notificación de éxito
       showToast('Eventos próximos cargados correctamente.', 'success', 'center')
     }
   } catch (error) {
     const errorMessage = document.createElement('p')
     errorMessage.textContent = 'Error al cargar los eventos próximos.'
     container.appendChild(errorMessage)
-
-    // Mostrar notificación de error
     showToast('Error al cargar los eventos próximos.', 'error', 'center')
   }
 

@@ -1,4 +1,4 @@
-import '../styles/Loader.css' // Asegúrate de que la ruta sea correcta
+import '../styles/Loader.css'
 
 function createLoader() {
   const loaderContainer = document.createElement('div')
@@ -14,8 +14,8 @@ function createLoader() {
   loaderContainer.appendChild(loader)
   loaderContainer.appendChild(loaderText)
 
-  console.log('createLoader called') // Verificar si la función se ejecuta
-  console.log(loaderText) // Verificar el contenido del loaderText
+  console.log('createLoader called')
+  console.log(loaderText)
 
   return loaderContainer
 }
