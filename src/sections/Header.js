@@ -149,7 +149,7 @@ function handleRouting(path) {
   } else if (path === '/gallery') {
     console.log('Cargando galería de eventos')
     createGalleryPage().then((galleryPage) => {
-      // Usando createGalleryPage
+      main.innerHTML = ''
       main.appendChild(galleryPage)
     })
   } else if (path === '/') {
