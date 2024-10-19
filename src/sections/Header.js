@@ -1,9 +1,9 @@
 import '../styles/Header.css'
 import { showToast } from '../utils/notification.js'
-import createEventList from '../components/EventList.js'
-import createUserProfile from '../components/UserProfile.js'
-import createHomePage from '../components/HomePage.js'
-import createGalleryPage from '../components/GalleryPage.js'
+import createEventList from '../pages/EventList.js'
+import createUserProfile from '../pages/UserProfile.js'
+import createHomePage from '../pages/HomePage.js'
+import createGalleryPage from '../pages/GalleryPage.js'
 
 function createHeader() {
   const header = document.createElement('header')
