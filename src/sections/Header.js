@@ -1,7 +1,7 @@
 import '../styles/Header.css' // Asegúrate de que la ruta sea correcta
 import { showToast } from '../utils/notification.js' // Importamos la función showToast
-import createEventList from '../components/EventList.js' // Asegúrate de tener las vistas correctas
-import createUserProfile from '../components/UserProfile.js' // Asegúrate de tener las vistas correctas
+import createEventList from '../pages/EventList.js' // Asegúrate de tener las vistas correctas
+import createUserProfile from '../pages/UserProfile.js' // Asegúrate de tener las vistas correctas
 import createHome from '../pages/Home.js'
 
 function createHeader() {
