@@ -147,6 +147,14 @@ function handleRouting(path) {
     console.log('Cargando página de inicio')
     const homePage = createHome()
     main.appendChild(homePage)
+  } else if (path === '/login') {
+    console.log('Cargando formulario de inicio de sesión')
+    const loginForm = createLoginForm()
+    main.appendChild(loginForm)
+  } else if (path === '/register') {
+    console.log('Cargando formulario de registro')
+    const registerForm = createRegisterForm()
+    main.appendChild(registerForm)
   } else {
     console.log('Cargando 404: Página no encontrada')
     const notFound = document.createElement('h1')
