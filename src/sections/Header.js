@@ -9,6 +9,10 @@ function createHeader() {
   const header = document.createElement('header')
   header.classList.add('header')
 
+  // Añadir estilos temporales para depuración
+  header.style.background = 'red'
+  header.style.height = '50px'
+
   const logo = document.createElement('a')
   logo.href = '/'
   logo.textContent = 'EventosApp'
