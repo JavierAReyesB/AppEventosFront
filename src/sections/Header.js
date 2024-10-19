@@ -1,5 +1,8 @@
 import '../styles/Header.css' // Asegúrate de que la ruta sea correcta
 import { showToast } from '../utils/notification.js' // Importamos la función showToast
+import createEventList from '../components/EventList.js' // Asegúrate de tener las vistas correctas
+import createUserProfile from '../components/UserProfile.js' // Asegúrate de tener las vistas correctas
+import createHomePage from '../components/HomePage.js' // Si tienes una página de inicio
 
 function createHeader() {
   const header = document.createElement('header')
@@ -21,7 +24,7 @@ function createHeader() {
   const galleryLink = createNavLink('/gallery', 'Galería') // Nuevo enlace a la galería
   nav.appendChild(homeLink)
   nav.appendChild(eventsLink)
-  nav.appendChild(galleryLink) // Añadimos el enlace de la galería
+  nav.appendChild(galleryLink)
 
   // Contenedor para la gestión del usuario
   const userDiv = document.createElement('div')
@@ -97,7 +100,7 @@ function createHeader() {
   // Añadir el ícono de menú al header
   header.appendChild(logo)
   header.appendChild(nav)
-  header.appendChild(hamburgerMenu) // Añadir menú hamburguesa
+  header.appendChild(hamburgerMenu)
   header.appendChild(userDiv)
 
   return header
@@ -113,7 +116,7 @@ function createNavLink(href, text) {
     // Cambiar la URL sin recargar la página
     window.history.pushState({}, '', href)
 
-    // Llamar a la función de manejo de rutas para actualizar el contenido
+    // Llamar a la función para cargar la nueva vista
     handleRouting(href)
   })
   return link
@@ -121,36 +124,40 @@ function createNavLink(href, text) {
 
 // Función para manejar la navegación basada en la URL
 function handleRouting(path) {
-  // Aquí puedes agregar más rutas según sea necesario
+  const app = document.getElementById('app') // El contenedor principal de la página
+  app.innerHTML = '' // Limpiamos el contenido anterior
+
   if (path === '/events') {
-    // Llamar a la función que carga la página de eventos
-    loadEventList()
+    // Cargar la vista de eventos
+    createEventList().then((eventList) => {
+      app.appendChild(eventList)
+    })
   } else if (path === '/profile') {
-    // Llamar a la función que carga el perfil del usuario
-    loadUserProfile()
+    // Cargar el perfil del usuario
+    const userProfile = createUserProfile()
+    app.appendChild(userProfile)
+  } else if (path === '/') {
+    // Cargar la página de inicio
+    const homePage = createHomePage()
+    app.appendChild(homePage)
   } else {
-    // Cargar la página de inicio por defecto
-    loadHomePage()
+    // Si no hay coincidencia, cargar una página de "No encontrado"
+    const notFound = document.createElement('h1')
+    notFound.textContent = '404: Página no encontrada'
+    app.appendChild(notFound)
   }
 }
 
-// Funciones para cargar páginas (puedes reemplazarlas con la lógica adecuada)
-function loadEventList() {
-  console.log('Cargando lista de eventos...')
-  // Aquí iría tu lógica para renderizar la lista de eventos
+// Funciones para cargar páginas (debes asegurarte de que existan)
+function createHomePage() {
+  const homePage = document.createElement('div')
+  const title = document.createElement('h1')
+  title.textContent = 'Bienvenido a EventosApp'
+  homePage.appendChild(title)
+  return homePage
 }
 
-function loadUserProfile() {
-  console.log('Cargando perfil de usuario...')
-  // Aquí iría tu lógica para renderizar el perfil del usuario
-}
-
-function loadHomePage() {
-  console.log('Cargando página de inicio...')
-  // Aquí iría tu lógica para renderizar la página de inicio
-}
-
-// Detectar cambios en la URL
+// Detectar cambios en la URL (cuando el usuario use los botones de adelante/atrás del navegador)
 window.addEventListener('popstate', function () {
   const currentPath = window.location.pathname
   handleRouting(currentPath)
