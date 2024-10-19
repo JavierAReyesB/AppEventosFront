@@ -52,10 +52,18 @@ function createCard(event) {
   detailButton.textContent = 'Ver detalles'
   detailButton.classList.add('card-button')
   detailButton.addEventListener('click', () => {
+    // Agregar loader al body
+    const loader = createLoader()
+    document.body.appendChild(loader)
+
     // Cambia la URL sin recargar la página
     window.history.pushState({}, '', `/events/${event._id}`)
+
     // Llama a la función navigateTo para gestionar la navegación y cargar el contenido
-    window.navigateTo(`/events/${event._id}`)
+    window.navigateTo(`/events/${event._id}`).then(() => {
+      // Remover loader una vez cargados los detalles del evento
+      document.body.removeChild(loader)
+    })
   })
 
   cardContent.appendChild(detailButton)
