@@ -10,6 +10,7 @@
   height: 100%; /* Ocupar toda la pantalla */
   z-index: 9999; /* Estar siempre por encima */
   background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+  padding-bottom: 50px;
 }
 
 .loader {
