@@ -1,22 +1,19 @@
 :root {
-  /* Colors */
-  --primary-light: #faf9f6; /* Fondo principal claro */
-  --primary-dark: #242424; /* Texto principal oscuro */
-  --secondary-light: #f39c12; /* Color secundario claro */
-  --secondary-dark: #e67e22; /* Color secundario oscuro */
-  --accent-light: #8e44ad; /* Acento claro (Morado claro) */
-  --accent-dark: #9b59b6; /* Acento oscuro (Morado oscuro) */
-  --neutral-light: #ecf0f1; /* Color neutro claro (Gris claro) */
-  --neutral-dark: #34495e; /* Color neutro oscuro (Gris oscuro) */
+  --primary-light: #faf9f6;
+  --primary-dark: #242424;
+  --secondary-light: #f39c12;
+  --secondary-dark: #e67e22;
+  --accent-light: #8e44ad;
+  --accent-dark: #9b59b6;
+  --neutral-light: #ecf0f1;
+  --neutral-dark: #34495e;
 
-  /* Spacings */
   --spacing-xl: 50px;
   --spacing-lg: 30px;
   --spacing-md: 20px;
   --spacing-sm: 10px;
   --spacing-xs: 5px;
 
-  /* Border Radius */
   --radius-sm: 5px;
   --radius-md: 15px;
   --radius-lg: 20px;
@@ -27,17 +24,13 @@
   margin: 0;
   padding: 0;
   list-style: none;
-  color: var(
-    --neutral-dark
-  ); /* Usar variable de color neutro oscuro para el texto */
+  color: var(--neutral-dark);
   font-family: 'Dancing Script';
 }
 
 a {
   text-decoration: none;
-  color: var(
-    --secondary-dark
-  ); /* Usar variable de color secundario oscuro para enlaces */
+  color: var(--secondary-dark);
 }
 
 html,
@@ -52,17 +45,17 @@ body {
 #app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Hace que el contenedor ocupe toda la altura de la ventana */
-  padding: 0; /* Usar variable de espaciado medio */
+  min-height: 100vh;
+  padding: 0;
 }
 
 main {
-  flex: 1; /* Mantener que el contenido principal crezca */
-  margin-top: 60px; /* Ajusta este valor según la altura real del header */
+  flex: 1;
+  margin-top: 60px;
 }
 
 body {
-  background-color: var(--neutral-light); /* Fondo en color neutro claro */
+  background-color: var(--neutral-light);
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
