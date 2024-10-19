@@ -109,9 +109,51 @@ function createNavLink(href, text) {
   link.textContent = text
   link.addEventListener('click', (e) => {
     e.preventDefault()
-    window.navigateTo(href) // Navegamos a la página sin recargar la aplicación
+
+    // Cambiar la URL sin recargar la página
+    window.history.pushState({}, '', href)
+
+    // Llamar a la función de manejo de rutas para actualizar el contenido
+    handleRouting(href)
   })
   return link
 }
+
+// Función para manejar la navegación basada en la URL
+function handleRouting(path) {
+  // Aquí puedes agregar más rutas según sea necesario
+  if (path === '/events') {
+    // Llamar a la función que carga la página de eventos
+    loadEventList()
+  } else if (path === '/profile') {
+    // Llamar a la función que carga el perfil del usuario
+    loadUserProfile()
+  } else {
+    // Cargar la página de inicio por defecto
+    loadHomePage()
+  }
+}
+
+// Funciones para cargar páginas (puedes reemplazarlas con la lógica adecuada)
+function loadEventList() {
+  console.log('Cargando lista de eventos...')
+  // Aquí iría tu lógica para renderizar la lista de eventos
+}
+
+function loadUserProfile() {
+  console.log('Cargando perfil de usuario...')
+  // Aquí iría tu lógica para renderizar el perfil del usuario
+}
+
+function loadHomePage() {
+  console.log('Cargando página de inicio...')
+  // Aquí iría tu lógica para renderizar la página de inicio
+}
+
+// Detectar cambios en la URL
+window.addEventListener('popstate', function () {
+  const currentPath = window.location.pathname
+  handleRouting(currentPath)
+})
 
 export default createHeader
