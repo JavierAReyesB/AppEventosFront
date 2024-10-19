@@ -126,32 +126,32 @@ function createNavLink(href, text) {
 }
 
 function handleRouting(path) {
-  const app = document.getElementById('app-container')
-  app.innerHTML = '' // Limpiamos el contenido anterior
+  const main = document.querySelector('main.custom-main') // Selecciona solo el main, no todo el app-container
+  main.innerHTML = '' // Limpiamos el contenido anterior del main
 
   if (path === '/events') {
     console.log('Cargando vista de eventos')
     createEventList().then((eventList) => {
-      app.appendChild(eventList)
+      main.appendChild(eventList)
     })
   } else if (path === '/profile') {
     console.log('Cargando perfil del usuario')
     const userProfile = createUserProfile()
-    app.appendChild(userProfile)
+    main.appendChild(userProfile)
   } else if (path === '/gallery') {
     console.log('Cargando galería de eventos')
     createGalleryPage().then((galleryPage) => {
-      app.appendChild(galleryPage)
+      main.appendChild(galleryPage)
     })
   } else if (path === '/') {
     console.log('Cargando página de inicio')
     const homePage = createHome()
-    app.appendChild(homePage)
+    main.appendChild(homePage)
   } else {
     console.log('Cargando 404: Página no encontrada')
     const notFound = document.createElement('h1')
     notFound.textContent = '404: Página no encontrada'
-    app.appendChild(notFound)
+    main.appendChild(notFound)
   }
 }
 
