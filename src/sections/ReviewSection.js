@@ -1,13 +1,11 @@
-import '../styles/ReviewSection.css' // Asegúrate de que el archivo CSS esté correctamente importado
-import fetchApi from '../services/apiService' // Importamos la función fetchApi
-import { createForm } from '../components/Form.js' // Importamos el nuevo formulario reutilizable
-import { showToast } from '../utils/notification.js' // Importamos la función de notificación
-import { displayError, clearError } from '../utils/errorHandler.js' // Importamos el errorHandler
+import '../styles/ReviewSection.css'
+import fetchApi from '../services/apiService'
+import { createForm } from '../components/Form.js'
+import { showToast } from '../utils/notification.js'
+import { displayError, clearError } from '../utils/errorHandler.js'
 
-// Obtener la URL del backend desde las variables de entorno
 const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
 
-// Función para obtener las reseñas del evento desde la API
 async function fetchReviews(eventId) {
   try {
     return await fetchApi(`${backendUrl}/api/reviews/event/${eventId}`)
@@ -19,20 +17,19 @@ async function fetchReviews(eventId) {
   }
 }
 
-// Función para agregar una nueva reseña
 async function addReview(eventId, reviewData) {
   const token = localStorage.getItem('token')
 
   try {
     await fetchApi(
-      `${backendUrl}/api/reviews/`, // Usar backendUrl aquí
+      `${backendUrl}/api/reviews/`,
       'POST',
       { ...reviewData, event: eventId },
       token
     )
     const newReviewSection = await createReviewSection(eventId)
     const currentSection = document.querySelector('.review-section')
-    currentSection.replaceWith(newReviewSection) // Reemplaza la sección actual por la actualizada
+    currentSection.replaceWith(newReviewSection)
     showToast('Reseña agregada con éxito.', 'success', 'center')
   } catch (error) {
     console.error('Error al agregar la reseña:', error)
@@ -41,19 +38,18 @@ async function addReview(eventId, reviewData) {
   }
 }
 
-// Función para modificar una reseña existente
 async function modifyReview(eventId, reviewId, reviewData) {
   const token = localStorage.getItem('token')
   try {
     await fetchApi(
-      `${backendUrl}/api/reviews/${reviewId}`, // Usar backendUrl aquí
+      `${backendUrl}/api/reviews/${reviewId}`,
       'PUT',
       reviewData,
       token
     )
-    const updatedReviewSection = await createReviewSection(eventId) // Asegúrate de actualizar la sección completa
+    const updatedReviewSection = await createReviewSection(eventId)
     const currentSection = document.querySelector('.review-section')
-    currentSection.replaceWith(updatedReviewSection) // Reemplaza la sección actual por la actualizada
+    currentSection.replaceWith(updatedReviewSection)
     showToast('Reseña modificada con éxito.', 'success', 'center')
   } catch (error) {
     console.error('Error al modificar la reseña:', error)
@@ -62,20 +58,17 @@ async function modifyReview(eventId, reviewId, reviewData) {
   }
 }
 
-// Función para eliminar una reseña
 async function deleteReview(reviewId, reviewElement, eventId) {
   const token = localStorage.getItem('token')
 
-  console.log('Token usado para eliminar:', token) // Asegúrate de que se imprime el token correcto
-
   try {
     await fetchApi(
-      `${backendUrl}/api/reviews/${reviewId}`, // Usar backendUrl aquí
+      `${backendUrl}/api/reviews/${reviewId}`,
       'DELETE',
       null,
       token
     )
-    reviewElement.remove() // Eliminamos el elemento visualmente
+    reviewElement.remove()
     const updatedReviewSection = await createReviewSection(eventId)
     const currentSection = document.querySelector('.review-section')
     currentSection.replaceWith(updatedReviewSection)
@@ -87,7 +80,6 @@ async function deleteReview(reviewId, reviewElement, eventId) {
   }
 }
 
-// Función para crear el formulario de agregar o modificar reseñas
 function createReviewForm(eventId, existingReview = null) {
   const fields = [
     {
@@ -110,7 +102,7 @@ function createReviewForm(eventId, existingReview = null) {
     fields,
     async (formData) => {
       if (existingReview) {
-        await modifyReview(eventId, existingReview._id, formData) // Pasamos eventId y reviewId
+        await modifyReview(eventId, existingReview._id, formData)
       } else {
         await addReview(eventId, formData)
       }
@@ -120,7 +112,6 @@ function createReviewForm(eventId, existingReview = null) {
   )
 }
 
-// Función para crear la sección de reseñas
 async function createReviewSection(eventId, eventAttendees = []) {
   const container = document.createElement('div')
   container.classList.add('review-section')
@@ -136,7 +127,7 @@ async function createReviewSection(eventId, eventAttendees = []) {
   let userId = null
 
   if (token) {
-    const decoded = jwt_decode(token) // Decodificar el token utilizando el script global
+    const decoded = jwt_decode(token)
     userRole = decoded.role
     userId = decoded.id
   }

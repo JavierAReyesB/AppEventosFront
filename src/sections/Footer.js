@@ -1,14 +1,12 @@
-import '../styles/Footer.css' // Importa el CSS del footer
+import '../styles/Footer.css'
 
 function createFooter() {
   const footer = document.createElement('footer')
   footer.classList.add('footer')
 
-  // Sección principal del footer
   const footerSections = document.createElement('div')
   footerSections.classList.add('footer-sections')
 
-  // Sección de categorías
   const categories = [
     {
       title: 'Acerca de Eventos App',
@@ -65,7 +63,6 @@ function createFooter() {
       const linkItem = document.createElement('a')
       linkItem.textContent = link.text
 
-      // Si el enlace es interno, usar window.navigateTo, si es externo, usar target _blank
       linkItem.href = link.href
       if (link.href.startsWith('/')) {
         linkItem.addEventListener('click', (e) => {
@@ -73,7 +70,7 @@ function createFooter() {
           window.navigateTo(link.href)
         })
       } else {
-        linkItem.target = '_blank' // Abrir en una nueva pestaña si es un enlace externo
+        linkItem.target = '_blank'
       }
 
       listItem.appendChild(linkItem)
@@ -85,23 +82,20 @@ function createFooter() {
     footerSections.appendChild(sectionDiv)
   })
 
-  // Enlace de "Descubre los próximos planes y experiencias"
   const appSection = document.createElement('div')
   appSection.classList.add('footer-app')
 
   const appText = document.createElement('p')
   appText.textContent =
     'Descubre los próximos planes y experiencias que mejor se adapten a ti.'
-  appText.classList.add('centered-text') // Clase para centrar el texto
+  appText.classList.add('centered-text')
 
   appSection.appendChild(appText)
 
-  // Texto inferior de derechos reservados
   const textElement = document.createElement('p')
   textElement.textContent = '© 2024 Eventos App. Todos los derechos reservados.'
   textElement.classList.add('footer-rights')
 
-  // Añadir todo al footer
   footer.appendChild(footerSections)
   footer.appendChild(appSection)
   footer.appendChild(textElement)

@@ -1,5 +1,5 @@
-import fetchApi from '../services/apiService' // Reutiliza la función fetchApi
-import '../styles/Gallery.css' // Asegúrate de que tienes el archivo CSS
+import fetchApi from '../services/apiService'
+import '../styles/Gallery.css'
 
 async function createGallery() {
   const container = document.createElement('div')
@@ -8,7 +8,7 @@ async function createGallery() {
   const events = await fetchApi(
     `${import.meta.env.VITE_APP_BACKEND_URL}/api/events`,
     'GET'
-  ) // Llamada a la API para obtener los eventos
+  )
 
   if (events.length === 0) {
     const noImageMessage = document.createElement('p')
@@ -20,14 +20,12 @@ async function createGallery() {
   const gallery = document.createElement('div')
   gallery.classList.add('gallery')
 
-  // Variables para el lightbox
   let currentIndex = 0
   let totalImages = events.filter((event) => event.poster).length
   let posters = events
     .filter((event) => event.poster)
     .map((event) => event.poster)
 
-  // Añadir las imágenes de los posters a la galería
   events.forEach((event, index) => {
     if (event.poster) {
       const img = document.createElement('img')
@@ -35,7 +33,6 @@ async function createGallery() {
       img.alt = `Imagen del evento ${event.title}`
       img.classList.add('gallery-image')
 
-      // Evento click para abrir el lightbox
       img.addEventListener('click', () => {
         currentIndex = index
         openLightbox(posters[currentIndex])
@@ -47,7 +44,6 @@ async function createGallery() {
 
   container.appendChild(gallery)
 
-  // Crear el lightbox para mostrar la imagen ampliada
   const lightbox = document.createElement('div')
   lightbox.classList.add('lightbox')
   const lightboxImage = document.createElement('img')
@@ -62,7 +58,6 @@ async function createGallery() {
   })
   lightbox.appendChild(closeButton)
 
-  // Flechas de navegación
   const prevButton = document.createElement('span')
   prevButton.classList.add('nav-button', 'prev-button')
   prevButton.textContent = '❮'
@@ -81,10 +76,8 @@ async function createGallery() {
   })
   lightbox.appendChild(nextButton)
 
-  // Añadir el lightbox al container
   container.appendChild(lightbox)
 
-  // Función para abrir el lightbox con la imagen
   function openLightbox(imageSrc) {
     lightboxImage.src = imageSrc
     lightbox.style.display = 'flex'
