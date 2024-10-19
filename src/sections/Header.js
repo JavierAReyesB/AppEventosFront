@@ -156,13 +156,13 @@ function handleRouting(path) {
 }
 
 // Funciones para cargar páginas (debes asegurarte de que existan)
-function createHome() {
-  const homePage = document.createElement('div')
-  const title = document.createElement('h1')
-  title.textContent = 'Bienvenido a EventosApp'
-  homePage.appendChild(title)
-  return homePage
-}
+// function createHome() {
+//   const homePage = document.createElement('div')
+//   const title = document.createElement('h1')
+//   title.textContent = 'Bienvenido a EventosApp'
+//   homePage.appendChild(title)
+//   return homePage
+// }
 
 // Detectar cambios en la URL (cuando el usuario use los botones de adelante/atrás del navegador)
 window.addEventListener('popstate', function () {
