@@ -56,7 +56,8 @@ function createRegisterForm() {
         localStorage.setItem('token', response.token) // Guardar token si es necesario
 
         setTimeout(() => {
-          window.navigateTo('/profile') // Redirigir al perfil de usuario después de 1 segundo
+          window.location.href = '/profile'
+          // Redirigir al perfil de usuario después de 1 segundo
         }, 1000)
       } catch (error) {
         displayError(
