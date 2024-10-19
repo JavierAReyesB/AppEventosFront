@@ -52,7 +52,8 @@ function createHeader() {
 
       // Redirigir al inicio después de un breve retraso
       setTimeout(() => {
-        window.navigateTo('/') // Redirigir al inicio sin recargar la página
+        window.history.pushState({}, '', '/') // Redirigir al inicio sin recargar la página
+        handleRouting('/') // Aseguramos que la página inicial se cargue correctamente
       }, 1000) // 1 segundo de retraso para que se vea la notificación
     })
 
@@ -74,13 +75,15 @@ function createHeader() {
     // Evento para el botón de "Iniciar Sesión"
     loginLink.addEventListener('click', (e) => {
       e.preventDefault()
-      window.navigateTo('/login')
+      window.history.pushState({}, '', '/login')
+      handleRouting('/login')
     })
 
     // Evento para el botón de "Registrarse"
     registerLink.addEventListener('click', (e) => {
       e.preventDefault()
-      window.navigateTo('/register')
+      window.history.pushState({}, '', '/register')
+      handleRouting('/register')
     })
 
     userDiv.appendChild(loginLink)
@@ -162,6 +165,12 @@ function createHomePage() {
 
 // Detectar cambios en la URL (cuando el usuario use los botones de adelante/atrás del navegador)
 window.addEventListener('popstate', function () {
+  const currentPath = window.location.pathname
+  handleRouting(currentPath)
+})
+
+// Cargar la página al inicio
+window.addEventListener('DOMContentLoaded', function () {
   const currentPath = window.location.pathname
   handleRouting(currentPath)
 })
