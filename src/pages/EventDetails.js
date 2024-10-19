@@ -5,6 +5,8 @@ import fetchApi from '../services/apiService.js' // Importamos la función reuti
 import { displayError, clearError } from '../utils/errorHandler.js' // Importamos las funciones de manejo de errores
 import { showToast } from '../utils/notification.js' // Importamos la función de notificación
 
+// Obtener la URL del backend desde las variables de entorno
+const backendUrl = import.meta.env.VITE_APP_BACKEND_URL // Esta línea va aquí, justo después de las importaciones
 // Función para obtener los detalles de un evento desde la API
 // Función para obtener los detalles de un evento desde la API
 async function fetchEventDetails(eventId) {
