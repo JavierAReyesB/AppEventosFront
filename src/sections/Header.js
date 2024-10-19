@@ -126,7 +126,7 @@ function createNavLink(href, text) {
 }
 
 function handleRouting(path) {
-  const app = document.getElementById('app-container')
+  const app = document.getElementById('app-container') // Usamos el ID 'app-container' como contenedor principal
   app.innerHTML = '' // Limpiamos el contenido anterior
 
   if (path === '/events') {
@@ -142,6 +142,11 @@ function handleRouting(path) {
     console.log('Cargando perfil del usuario')
     const userProfile = createUserProfile()
     app.appendChild(userProfile)
+  } else if (path === '/gallery') {
+    console.log('Cargando galería de eventos')
+    createGalleryPage().then((galleryPage) => {
+      app.appendChild(galleryPage)
+    })
   } else if (path === '/') {
     console.log('Cargando página de inicio')
     const homePage = createHomePage()
