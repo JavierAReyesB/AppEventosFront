@@ -1,23 +1,31 @@
 import '../styles/LoginRegister.css'
-import { loginUser } from '../services/authService.js'
-import { createForm } from '../components/Form.js'
-import { displayError, clearError } from '../utils/errorHandler.js'
-import { showToast } from '../utils/notification.js' // Importa la función de notificación
+import { registerUser } from '../services/authService.js'
+import { createForm } from '../components/Form.js' // Importamos el nuevo Form.js
+import { displayError, clearError } from '../utils/errorHandler.js' // Importamos el manejador de errores
+import { showToast } from '../utils/notification.js' // Importamos la función de notificación
+import createHeader from '../components/Header.js' // Importamos la función para crear el Header
 
-function createLoginForm() {
-  const loginContainer = document.createElement('div')
-  loginContainer.classList.add('form-container')
+function createRegisterForm() {
+  const registerContainer = document.createElement('div')
+  registerContainer.classList.add('form-container')
 
   const title = document.createElement('h1')
-  title.textContent = 'Iniciar Sesión'
-  loginContainer.appendChild(title)
+  title.textContent = 'Registro'
+  registerContainer.appendChild(title)
 
   const errorMessage = document.createElement('p')
   errorMessage.classList.add('error-message')
-  loginContainer.appendChild(errorMessage)
+  registerContainer.appendChild(errorMessage)
 
-  // Definir los campos del formulario de inicio de sesión
+  // Definir los campos del formulario de registro
   const fields = [
+    {
+      type: 'text',
+      name: 'name',
+      label: 'Nombre',
+      placeholder: 'Nombre',
+      isRequired: true
+    },
     {
       type: 'email',
       name: 'email',
@@ -31,56 +39,47 @@ function createLoginForm() {
       label: 'Contraseña',
       placeholder: 'Contraseña',
       isRequired: true
-    },
-    {
-      type: 'checkbox',
-      name: 'rememberMe',
-      label: 'Recordar sesión',
-      isRequired: false // Este campo no es obligatorio
     }
   ]
 
-  // Crear el formulario reutilizable usando createForm de Form.js
+  // Crear el formulario utilizando `createForm` de `Form.js`
   const form = createForm(
     fields,
     async (formData) => {
       clearError(errorMessage) // Limpiar cualquier mensaje de error previo
 
       try {
-        const response = await loginUser(formData)
+        const response = await registerUser(formData)
 
-        // Llamar a showToast para mostrar la notificación de éxito
-        showToast('Inicio de sesión exitoso. ¡Bienvenido!', 'success', 'center')
+        // Mostrar notificación de éxito con `Toastify`
+        showToast('Registro exitoso. ¡Bienvenido!', 'success', 'center')
 
-        // Guardar el token en localStorage o sessionStorage
-        const storage = formData.rememberMe ? localStorage : sessionStorage
-        storage.setItem('token', response.token)
+        localStorage.setItem('token', response.token) // Guardar token si es necesario
 
-        // Redirigir al perfil de usuario
         setTimeout(() => {
-          window.location.href = '/profile'
-        }, 1000) // Redirigir después de 1 segundo
+          window.navigateTo('/profile') // Redirigir al perfil de usuario después de 1 segundo
+
+          // *** Actualizar el header ***
+          const newHeader = createHeader()
+          document.querySelector('header').replaceWith(newHeader) // Reemplazar el header con la nueva versión
+        }, 1000)
       } catch (error) {
         displayError(
-          'Error en el inicio de sesión. Verifica tus credenciales.',
+          'Error en el registro. Intenta de nuevo o verifica tus datos.',
           errorMessage,
           'form'
         )
 
-        // Llamar a showToast para mostrar la notificación de error
-        showToast(
-          'Error al iniciar sesión. Intente de nuevo.',
-          'error',
-          'center'
-        )
+        // Mostrar notificación de error con `Toastify`
+        showToast('Error en el registro. Intenta de nuevo.', 'error', 'center')
       }
     },
-    'login-form', // Clase CSS opcional para personalizar el formulario
-    'Iniciar Sesión' // Texto del botón de envío
+    'register-form', // Clase CSS opcional para personalizar el formulario
+    'Registrar' // Texto del botón de envío
   )
 
-  loginContainer.appendChild(form)
-  return loginContainer
+  registerContainer.appendChild(form)
+  return registerContainer
 }
 
-export default createLoginForm
+export default createRegisterForm
