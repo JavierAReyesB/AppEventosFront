@@ -81,7 +81,6 @@ input:focus {
   border-color: var(--accent-light);
 }
 
-/* Responsive para pantallas más pequeñas */
 @media (max-width: 768px) {
   .event-details-container {
     padding: 20px;

@@ -1,12 +1,11 @@
-/* Estilos generales para el formulario de inicio de sesión y registro */
 .form-container {
   width: 100%;
   max-width: 400px;
-  margin: 100px auto; /* Centrar el formulario en la pantalla con un margen superior */
+  margin: 100px auto;
   padding: 20px;
   background-color: var(--neutral-light);
   border-radius: var(--radius-md);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-container h1 {
@@ -27,7 +26,7 @@
 
 .form-container input[type='checkbox'] {
   margin-right: 10px;
-  transform: scale(1.2); /* Agrandar el checkbox */
+  transform: scale(1.2);
 }
 
 .form-container button {
@@ -52,26 +51,22 @@
   color: var(--accent-dark);
 }
 
-/* Estilos específicos para el label del checkbox */
 .form-container label {
   display: flex;
-  align-items: center; /* Alinear el checkbox y el texto */
+  align-items: center;
   font-size: 14px;
   color: var(--primary-dark);
   margin-bottom: var(--spacing-sm);
-  justify-content: center; /* Centrar tanto el checkbox como el texto */
+  justify-content: center;
   cursor: pointer;
 }
 
 .form-container input[type='checkbox']:checked {
-  accent-color: var(
-    --accent-dark
-  ); /* Color del checkbox cuando está seleccionado */
+  accent-color: var(--accent-dark);
 }
 
-/* Ajuste para hacer que el texto esté centrado sobre el checkbox */
 .form-container label .checkbox-wrapper {
   display: flex;
   align-items: center;
-  gap: 5px; /* Espaciado entre el checkbox y el texto */
+  gap: 5px;
 }

@@ -10,10 +10,10 @@
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
-  flex-direction: column; /* Organiza los elementos en una columna */
-  justify-content: center; /* Centra verticalmente */
-  align-items: center; /* Centra horizontalmente */
-  padding: var(--spacing-md); /* Ajuste para dejar espacio interno */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-md);
 }
 
 .card:hover {
@@ -38,44 +38,42 @@
 .card-content {
   position: relative;
   z-index: 2;
-  text-align: center; /* Centramos el contenido */
-  width: 100%; /* Aseguramos que ocupe todo el ancho */
+  text-align: center;
+  width: 100%;
 }
 
 .card-title {
   font-size: 1.8rem;
-  color: var(--accent-light); /* Color morado claro */
+  color: var(--accent-light);
   margin-bottom: var(--spacing-xs);
-  text-align: center; /* Título centrado */
+  text-align: center;
 }
 
 .card-description {
   margin-bottom: var(--spacing-xs);
-  color: var(--neutral-light); /* Texto claro */
-  text-align: center; /* Centrar la descripción */
+  color: var(--neutral-light);
+  text-align: center;
 }
 
 .card-date {
   font-size: 0.9rem;
   color: var(--neutral-light);
   margin-bottom: var(--spacing-sm);
-  text-align: center; /* Fecha centrada */
+  text-align: center;
 }
 
 .card-button {
-  margin-top: var(--spacing-md); /* Añadimos un margen superior */
-  background-color: var(--accent-dark); /* Botón morado oscuro */
+  margin-top: var(--spacing-md);
+  background-color: var(--accent-dark);
   color: var(--neutral-light);
   padding: var(--spacing-xs) var(--spacing-md);
   border: none;
   border-radius: var(--radius-md);
   cursor: pointer;
   transition: background-color 0.3s ease;
-  text-align: center; /* Botón centrado */
+  text-align: center;
 }
 
 .card-button:hover {
-  background-color: var(
-    --secondary-dark
-  ); /* Color secundario oscuro en hover */
+  background-color: var(--secondary-dark);
 }

@@ -1,125 +1,113 @@
 .event-list-container {
-  padding: var(--spacing-lg); /* Espaciado grande */
-  max-width: 1200px; /* Ajusta el ancho máximo del contenedor */
-  margin: var(--spacing-xl) auto; /* Centramos la lista de eventos */
+  padding: var(--spacing-lg);
+  max-width: 1200px;
+  margin: var(--spacing-xl) auto;
 }
 
 .event-list-container h1 {
-  text-align: center; /* Centramos el título */
-  font-size: 2rem; /* Ajustamos el tamaño del texto */
-  margin-bottom: var(
-    --spacing-md
-  ); /* Margen inferior para separar del contenido */
-  color: var(--neutral-dark); /* Usamos el color neutro oscuro */
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--neutral-dark);
 }
 
 .event-list {
-  display: grid; /* Usamos grid layout */
-  grid-template-columns: repeat(1, 1fr); /* Una columna por defecto */
-  gap: var(--spacing-md); /* Espaciado medio entre los eventos */
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-md);
 }
 
-/* Para pantallas grandes */
 @media (min-width: 1024px) {
   .event-list {
-    grid-template-columns: repeat(
-      2,
-      1fr
-    ); /* Dos columnas en pantallas grandes */
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 .event-item {
   display: flex;
-  flex-direction: column; /* Organiza los elementos en columna */
-  justify-content: center; /* Centra verticalmente */
-  align-items: center; /* Centra horizontalmente */
-  position: relative; /* Necesario para posicionar el botón de manera correcta */
-  border: 1px solid var(--neutral-dark); /* Borde neutro oscuro */
-  padding: var(--spacing-md); /* Espaciado medio */
-  border-radius: var(--radius-md); /* Bordes redondeados */
-  background-color: var(--neutral-light); /* Fondo neutro claro */
-  transition: transform 0.3s ease; /* Transición suave para animaciones */
-  text-align: center; /* Texto centrado */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  border: 1px solid var(--neutral-dark);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  background-color: var(--neutral-light);
+  transition: transform 0.3s ease;
+  text-align: center;
 }
 
 .event-item:hover {
-  transform: scale(1.02); /* Efecto de zoom */
+  transform: scale(1.02);
 }
 
 .event-item h2 {
-  margin: 0 0 var(--spacing-sm); /* Espaciado debajo del título */
+  margin: 0 0 var(--spacing-sm);
   font-size: 1.8rem;
-  color: var(--accent-dark); /* Color de acento oscuro para el título */
+  color: var(--accent-dark);
 }
 
 .event-item p {
-  margin: var(--spacing-xs) 0; /* Espaciado pequeño */
-  color: var(--neutral-dark); /* Color neutro oscuro para el texto */
+  margin: var(--spacing-xs) 0;
+  color: var(--neutral-dark);
 }
 
 .event-item .event-date {
-  margin-bottom: var(--spacing-xs); /* Espaciado pequeño debajo de la fecha */
-  color: var(--neutral-dark); /* Color neutro oscuro */
-  font-size: 0.9rem; /* Ajustamos tamaño */
+  margin-bottom: var(--spacing-xs);
+  color: var(--neutral-dark);
+  font-size: 0.9rem;
 }
 
 .event-item button {
-  margin-top: var(--spacing-md); /* Añadimos un margen superior */
-  padding: var(--spacing-sm) var(--spacing-md); /* Espaciado interno */
-  background-color: var(--primary-dark); /* Fondo oscuro para el botón */
-  color: var(--neutral-light); /* Texto claro */
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--primary-dark);
+  color: var(--neutral-light);
   border: none;
-  border-radius: var(--radius-md); /* Bordes redondeados */
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .event-item button:hover {
-  background-color: var(
-    --secondary-dark
-  ); /* Color secundario oscuro en hover */
+  background-color: var(--secondary-dark);
 }
 
-/* Adaptación para pantallas pequeñas */
 @media (max-width: 768px) {
   .event-list-container {
-    padding: var(--spacing-md); /* Espaciado medio en pantallas pequeñas */
+    padding: var(--spacing-md);
   }
 
   .event-item {
-    padding: var(--spacing-md); /* Espaciado medio */
+    padding: var(--spacing-md);
   }
 
   .event-item h2 {
-    font-size: 1.5rem; /* Título más pequeño */
+    font-size: 1.5rem;
   }
 
   .event-item button {
-    padding: var(--spacing-xs) var(--spacing-sm); /* Ajustamos el padding en pantallas pequeñas */
+    padding: var(--spacing-xs) var(--spacing-sm);
     font-size: 0.9rem;
   }
 }
 
-/* Estilos para el contenedor de filtros */
 .filter-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--spacing-md); /* Añadir espacio entre los elementos */
-  margin-bottom: var(
-    --spacing-lg
-  ); /* Espacio inferior para separarlo de la lista de eventos */
-  padding: var(--spacing-sm); /* Espaciado interno */
-  background-color: var(--neutral-light); /* Fondo claro */
-  border: 1px solid var(--neutral-dark); /* Borde neutro oscuro */
-  border-radius: var(--radius-md); /* Bordes redondeados */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  padding: var(--spacing-sm);
+  background-color: var(--neutral-light);
+  border: 1px solid var(--neutral-dark);
+  border-radius: var(--radius-md);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .filter-container input[type='text'] {
   padding: var(--spacing-sm);
-  width: 60%; /* Ajustar el ancho para que sea responsivo */
+  width: 60%;
   border: 1px solid var(--neutral-dark);
   border-radius: var(--radius-md);
   background-color: var(--primary-light);
@@ -161,22 +149,21 @@
   background-color: var(--accent-dark);
 }
 
-/* Responsive para filtros en pantallas pequeñas */
 @media (max-width: 768px) {
   .filter-container {
-    flex-direction: column; /* Cambia a columna en pantallas pequeñas */
-    gap: var(--spacing-sm); /* Reduce el espacio entre los elementos */
+    flex-direction: column;
+    gap: var(--spacing-sm);
   }
 
   .filter-container input[type='text'] {
-    width: 100%; /* El input toma el 100% del ancho en pantallas pequeñas */
+    width: 100%;
   }
 
   .filter-container select {
-    width: 100%; /* Los select también toman el 100% del ancho */
+    width: 100%;
   }
 
   .filter-container button {
-    width: 100%; /* El botón ocupa todo el ancho */
+    width: 100%;
   }
 }

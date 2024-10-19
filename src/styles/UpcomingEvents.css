@@ -1,19 +1,16 @@
-/* Estilos para la sección de eventos futuros */
 .upcoming-events-container {
-  padding: var(--spacing-lg); /* Usar espaciado grande */
-  border: 1px solid var(--neutral-dark); /* Borde en color neutro oscuro */
-  border-radius: var(--radius-md); /* Bordes redondeados medianos */
-  margin-top: var(--spacing-md); /* Margen superior medio */
-  background-color: var(--neutral-light); /* Fondo en color neutro claro */
+  padding: var(--spacing-lg);
+  border: 1px solid var(--neutral-dark);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-md);
+  background-color: var(--neutral-light);
 }
 
 .event-item {
-  padding: var(--spacing-sm); /* Espaciado pequeño */
-  border-bottom: 1px solid var(--neutral-dark); /* Borde inferior en color neutro oscuro */
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid var(--neutral-dark);
 }
 
 .event-item:hover {
-  background-color: var(
-    --accent-light
-  ); /* Fondo en color de acento claro (morado claro) */
+  background-color: var(--accent-light);
 }

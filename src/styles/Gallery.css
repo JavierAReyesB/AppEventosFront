@@ -1,87 +1,81 @@
 .gallery-container {
-  padding: var(--spacing-lg); /* Espaciado grande */
+  padding: var(--spacing-lg);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  text-align: center; /* Centramos el texto */
+  text-align: center;
 }
 
 .gallery-title {
   font-size: 2rem;
-  color: var(--primary-dark); /* Color primario oscuro */
-  margin-bottom: var(--spacing-lg); /* Margen inferior grande */
+  color: var(--primary-dark);
+  margin-bottom: var(--spacing-lg);
   text-align: center;
 }
 
 .gallery {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Siempre 3 columnas */
-  grid-gap: var(--spacing-md); /* Espaciado medio entre las columnas */
-  width: 100%; /* Ocupa todo el ancho disponible */
-  max-width: 1200px; /* Limita el ancho máximo */
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: var(--spacing-md);
+  width: 100%;
+  max-width: 1200px;
 }
 
 .gallery-image {
   width: 100%;
-  height: 200px; /* Ajustamos la altura de las imágenes */
-  border-radius: var(--radius-md); /* Bordes redondeados */
-  object-fit: cover; /* Aseguramos que la imagen cubra el espacio correctamente */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Efectos de hover */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Sombra */
+  height: 200px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .gallery-image:hover {
-  transform: scale(1.05); /* Efecto de zoom */
-  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más intensa en hover */
+  transform: scale(1.05);
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-/* Adaptación para pantallas pequeñas */
 @media (max-width: 768px) {
   .gallery {
-    grid-template-columns: repeat(
-      1,
-      1fr
-    ); /* Una columna en pantallas pequeñas */
+    grid-template-columns: repeat(1, 1fr);
   }
 
   .gallery-image {
-    height: 150px; /* Reducimos la altura en pantallas pequeñas */
+    height: 150px;
   }
 }
 
-/* Lightbox estilos */
 .lightbox {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Fondo semitransparente oscuro */
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
   display: none;
-  padding: var(--spacing-md); /* Espaciado medio */
+  padding: var(--spacing-md);
   box-sizing: border-box;
 }
 
-/* Estilo para la imagen del lightbox */
 .lightbox-image {
-  max-width: 90%; /* Ajusta la imagen al 90% del ancho de la ventana */
-  max-height: 90%; /* Ajusta la imagen al 90% de la altura de la ventana */
-  object-fit: contain; /* Asegura que la imagen se ajuste correctamente */
-  border-radius: var(--radius-lg); /* Bordes redondeados grandes */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .close-button {
   position: absolute;
-  top: var(--spacing-md); /* Usar espaciado medio */
+  top: var(--spacing-md);
   right: var(--spacing-md);
   font-size: 2rem;
-  color: var(--neutral-light); /* Color neutro claro */
+  color: var(--neutral-light);
   cursor: pointer;
 }
 
@@ -90,55 +84,46 @@
   top: 50%;
   transform: translateY(-50%);
   font-size: 2rem;
-  color: var(--neutral-light); /* Color neutro claro */
-  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente oscuro */
+  color: var(--neutral-light);
+  background-color: rgba(0, 0, 0, 0.5);
   border: none;
   cursor: pointer;
-  padding: var(--spacing-sm); /* Espaciado pequeño */
+  padding: var(--spacing-sm);
   border-radius: 50%;
   z-index: 10;
 }
 
 .prev-button {
-  left: var(--spacing-md); /* Usar espaciado medio */
+  left: var(--spacing-md);
 }
 
 .next-button {
-  right: var(--spacing-md); /* Usar espaciado medio */
+  right: var(--spacing-md);
 }
 
-/* Efectos al hacer hover en las flechas */
 .nav-button:hover {
-  background-color: rgba(0, 0, 0, 0.8); /* Fondo semitransparente más oscuro */
+  background-color: rgba(0, 0, 0, 0.8);
   transform: scale(1.1);
 }
 
-/* Para pantallas medianas (tablets) entre 768px y 1024px */
 @media (min-width: 769px) and (max-width: 1024px) {
   .gallery {
-    grid-template-columns: repeat(
-      2,
-      1fr
-    ); /* Dos columnas en pantallas medianas */
-    grid-gap: var(--spacing-md); /* Espaciado medio entre las columnas */
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: var(--spacing-md);
   }
 
   .gallery-image {
-    height: 180px; /* Ajuste la altura de las imágenes para pantallas medianas */
+    height: 180px;
   }
 }
 
-/* Para pantallas grandes (desktop) mayores a 1024px */
 @media (min-width: 1025px) {
   .gallery {
-    grid-template-columns: repeat(
-      3,
-      1fr
-    ); /* Tres columnas en pantallas grandes */
-    grid-gap: var(--spacing-lg); /* Espaciado grande entre las columnas */
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: var(--spacing-lg);
   }
 
   .gallery-image {
-    height: 200px; /* Altura original para pantallas grandes */
+    height: 200px;
   }
 }

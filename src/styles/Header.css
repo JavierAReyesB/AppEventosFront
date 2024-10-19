@@ -1,64 +1,59 @@
 .header {
   width: 100%;
-  background-color: var(--primary-light); /* Fondo claro */
-  color: var(--primary-dark); /* Texto oscuro */
-  padding: var(--spacing-sm) var(--spacing-md); /* Espaciado interno */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra para darle profundidad */
-  position: fixed; /* Fijo en la parte superior */
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+  padding: var(--spacing-sm) var(--spacing-md);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000; /* Encima de otros elementos */
-  display: flex; /* Flexbox para alinear el contenido */
-  justify-content: space-between; /* Espacio entre logo, nav y opciones de usuario */
-  align-items: center; /* Alinea verticalmente */
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
   font-weight: bold;
   font-size: 24px;
-  margin-left: var(--spacing-md); /* Alineación del logo */
-  color: var(--primary-dark); /* Color oscuro para el logo */
+  margin-left: var(--spacing-md);
+  color: var(--primary-dark);
 }
 
 .main-nav {
-  display: flex; /* Flexbox para alinear los enlaces horizontalmente */
-  gap: var(--spacing-lg); /* Espacio entre los enlaces de navegación */
+  display: flex;
+  gap: var(--spacing-lg);
 }
 
 .main-nav a {
-  color: var(--primary-dark); /* Color de los enlaces */
-  text-decoration: none; /* Sin subrayado */
+  color: var(--primary-dark);
+  text-decoration: none;
   font-weight: bold;
-  text-transform: uppercase; /* Texto en mayúsculas */
+  text-transform: uppercase;
   font-size: 16px;
   padding: var(--spacing-xs) var(--spacing-sm);
 }
 
 .main-nav a:hover {
-  color: var(--secondary-dark); /* Color al hacer hover */
+  color: var(--secondary-dark);
 }
 
 .user-options {
   display: flex;
-  gap: var(--spacing-md); /* Espacio entre las opciones de usuario */
-  margin-right: var(
-    --spacing-md
-  ); /* Ajuste derecho del contenedor de opciones */
+  gap: var(--spacing-md);
+  margin-right: var(--spacing-md);
 }
 
 .user-options a {
-  color: var(--primary-dark); /* Color para los enlaces de usuario */
+  color: var(--primary-dark);
   text-decoration: none;
   font-size: 14px;
 }
 
 .user-options a:hover {
-  color: var(--secondary-dark); /* Color al hacer hover */
+  color: var(--secondary-dark);
 }
 
-/* Estilos Responsive */
-
-/* Ocultar el menú de navegación en pantallas pequeñas y mostrar el icono de menú */
 .hamburger-menu {
   display: none;
   font-size: 24px;
@@ -68,7 +63,7 @@
 
 @media (max-width: 768px) {
   .main-nav {
-    display: none; /* Ocultar el menú en pantallas pequeñas */
+    display: none;
     flex-direction: column;
     position: absolute;
     top: 60px;
@@ -76,11 +71,11 @@
     width: 100%;
     background-color: var(--primary-light);
     padding: var(--spacing-md) 0;
-    z-index: 999; /* Asegurarse de que esté por encima de otros elementos */
+    z-index: 999;
   }
 
   .main-nav.active {
-    display: flex; /* Mostrar el menú cuando esté activo */
+    display: flex;
   }
 
   .main-nav a {
@@ -89,6 +84,6 @@
   }
 
   .hamburger-menu {
-    display: block; /* Mostrar el icono de hamburguesa en pantallas pequeñas */
+    display: block;
   }
 }

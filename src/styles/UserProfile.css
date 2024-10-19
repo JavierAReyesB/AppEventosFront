@@ -1,62 +1,61 @@
 .user-profile-container {
-  padding: var(--spacing-lg); /* Usar espaciado grande */
-  background-color: var(--accent-dark); /* Usar color de acento oscuro */
-  color: var(--neutral-light); /* Texto claro */
-  border-radius: var(--radius-md); /* Bordes redondeados medianos */
+  padding: var(--spacing-lg);
+  background-color: var(--accent-dark);
+  color: var(--neutral-light);
+  border-radius: var(--radius-md);
   max-width: 600px;
-  margin: var(--spacing-xl) auto; /* Centramos el contenedor y añadimos margen */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin: var(--spacing-xl) auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .user-profile-container h1 {
   font-size: 2rem;
-  color: var(--neutral-light); /* Título con color claro */
+  color: var(--neutral-light);
   text-align: center;
-  margin-bottom: var(--spacing-lg); /* Margen inferior grande */
+  margin-bottom: var(--spacing-lg);
 }
 
 .user-info {
-  padding: var(--spacing-lg); /* Usar espaciado grande */
-  border: 1px solid var(--neutral-dark); /* Borde en color neutro oscuro */
-  border-radius: var(--radius-md); /* Bordes redondeados medianos */
-  margin-top: var(--spacing-md); /* Margen superior medio */
-  background-color: var(--neutral-light); /* Fondo en color neutro claro */
+  padding: var(--spacing-lg);
+  border: 1px solid var(--neutral-dark);
+  border-radius: var(--radius-md);
+  margin-top: var(--spacing-md);
+  background-color: var(--neutral-light);
 }
 
 .user-info p {
-  margin-bottom: var(--spacing-md); /* Margen inferior medio */
+  margin-bottom: var(--spacing-md);
   font-size: 1rem;
-  color: var(--primary-dark); /* Texto con color primario oscuro */
+  color: var(--primary-dark);
 }
 
 button {
-  margin-top: var(--spacing-md); /* Margen superior medio */
-  padding: var(--spacing-sm) var(--spacing-md); /* Usar espaciados */
-  background-color: var(--accent-light); /* Color de acento claro */
-  color: var(--neutral-light); /* Texto claro */
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--accent-light);
+  color: var(--neutral-light);
   border: none;
-  border-radius: var(--radius-md); /* Bordes redondeados medianos */
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: var(--accent-dark); /* Color de acento oscuro en hover */
+  background-color: var(--accent-dark);
 }
 
-/* Sección para los eventos */
 .event-section {
-  margin-top: var(--spacing-lg); /* Margen superior grande */
-  padding: var(--spacing-md); /* Usar espaciado medio */
-  background-color: var(--neutral-light); /* Fondo claro */
-  border-radius: var(--radius-md); /* Bordes redondeados */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background-color: var(--neutral-light);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .event-section h2 {
   font-size: 1.5rem;
-  margin-bottom: var(--spacing-md); /* Margen inferior medio */
-  color: var(--accent-dark); /* Color de acento oscuro */
+  margin-bottom: var(--spacing-md);
+  color: var(--accent-dark);
 }
 
 .event-section ul {
@@ -64,15 +63,14 @@ button:hover {
 }
 
 .event-section li {
-  margin-bottom: var(--spacing-sm); /* Espaciado pequeño entre los elementos */
-  color: var(--primary-dark); /* Color del texto de los eventos */
+  margin-bottom: var(--spacing-sm);
+  color: var(--primary-dark);
 }
 
-/* Responsive para pantallas más pequeñas */
 @media (max-width: 768px) {
   .user-profile-container {
     padding: var(--spacing-md);
-    max-width: 90%; /* Asegura que ocupe todo el ancho en pantallas más pequeñas */
+    max-width: 90%;
   }
 
   .user-profile-container h1 {
@@ -80,23 +78,23 @@ button:hover {
   }
 
   .user-info {
-    padding: var(--spacing-sm); /* Reducimos el padding en pantallas pequeñas */
+    padding: var(--spacing-sm);
   }
 
   .event-section {
-    padding: var(--spacing-sm); /* Reducimos el padding en pantallas pequeñas */
+    padding: var(--spacing-sm);
   }
 
   button {
-    padding: var(--spacing-xs) var(--spacing-sm); /* Reducimos el padding de los botones */
+    padding: var(--spacing-xs) var(--spacing-sm);
     font-size: 1rem;
   }
 }
 
 @media (max-width: 480px) {
   .user-profile-container {
-    padding: var(--spacing-sm); /* Menor padding en móviles */
-    margin-top: var(--spacing-md); /* Reducimos el margen superior */
+    padding: var(--spacing-sm);
+    margin-top: var(--spacing-md);
   }
 
   .user-profile-container h1 {
@@ -104,15 +102,15 @@ button:hover {
   }
 
   .user-info {
-    padding: var(--spacing-xs); /* Reducimos aún más el padding */
+    padding: var(--spacing-xs);
   }
 
   .event-section {
-    padding: var(--spacing-xs); /* Menor padding en móviles */
+    padding: var(--spacing-xs);
   }
 
   button {
-    padding: var(--spacing-xs); /* Menor padding en los botones */
+    padding: var(--spacing-xs);
     font-size: 0.9rem;
   }
 }
