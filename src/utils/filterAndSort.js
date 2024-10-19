@@ -1,4 +1,3 @@
-// Función para ordenar eventos por fecha
 export function sortEventsByDate(events, ascending = true) {
   return events.sort((a, b) => {
     const dateA = new Date(a.date)
@@ -7,7 +6,6 @@ export function sortEventsByDate(events, ascending = true) {
   })
 }
 
-// Función para filtrar eventos por ubicación
 export function filterEventsByLocation(events, location) {
   return events.filter(
     (event) =>

@@ -1,7 +1,6 @@
-// utils/notification.js
 import Toastify from 'toastify-js'
 import 'toastify-js/src/toastify.css'
-import '../styles/toastifyStyles.css' // Importa tu archivo CSS personalizado
+import '../styles/toastifyStyles.css'
 
 export function showToast(
   message,
@@ -13,9 +12,9 @@ export function showToast(
     text: message,
     duration: duration,
     gravity: 'top',
-    position: position, // Esto define la posición correctamente
-    className: `toastify--${type}`, // Usa las clases CSS para los estilos
-    close: true, // Muestra el botón de cierre
-    stopOnFocus: true // Pausar si el usuario pone el cursor encima
+    position: position,
+    className: `toastify--${type}`,
+    close: true,
+    stopOnFocus: true
   }).showToast()
 }
