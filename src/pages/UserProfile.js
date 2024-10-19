@@ -2,6 +2,7 @@ import '../styles/UserProfile.css' // Asegúrate de que la ruta sea correcta
 import createAttendedEvents from '../components/AttendedEvents.js' // Importamos el componente de eventos asistidos
 import createUpcomingEvents from '../components/UpcomingEvents.js' // Importamos el componente de eventos futuros
 import { showToast } from '../utils/notification.js' // Importamos la función de notificación
+import { displayError, clearError } from '../utils/errorHandler.js' // Importamos el manejador de errores
 
 function createUserProfile() {
   const userProfileContainer = document.createElement('div')
@@ -21,16 +22,23 @@ function createUserProfile() {
     } catch (error) {
       console.error('Error al decodificar el token', error)
 
-      // Notificación de error si no se puede decodificar el token
+      // Manejamos el error con displayError y showToast
+      displayError(
+        'Error al cargar los datos del usuario.',
+        userProfileContainer,
+        'network'
+      )
       showToast('Error al cargar los datos del usuario.', 'error', 'center')
-      userProfileContainer.textContent =
-        'Error al cargar los datos del usuario.'
       return userProfileContainer
     }
   } else {
-    // Notificación de error si no se encuentra un token
+    // Manejamos el error si no se encuentra un token
+    displayError(
+      'No se encontró un token de usuario.',
+      userProfileContainer,
+      'general'
+    )
     showToast('No se encontró un token de usuario.', 'error', 'center')
-    userProfileContainer.textContent = 'No se encontró un token de usuario.'
     return userProfileContainer
   }
 
@@ -78,6 +86,11 @@ function createUserProfile() {
       userProfileContainer.appendChild(attendedEventsContainer)
     } catch (error) {
       console.error('Error al cargar eventos asistidos:', error)
+      displayError(
+        'Error al cargar los eventos asistidos.',
+        userProfileContainer,
+        'network'
+      )
       showToast(
         'Error al cargar los eventos asistidos. Inténtalo de nuevo.',
         'error',
@@ -93,6 +106,11 @@ function createUserProfile() {
       userProfileContainer.appendChild(upcomingEventsContainer)
     } catch (error) {
       console.error('Error al cargar eventos futuros:', error)
+      displayError(
+        'Error al cargar los eventos futuros.',
+        userProfileContainer,
+        'network'
+      )
       showToast(
         'Error al cargar los eventos futuros. Inténtalo de nuevo.',
         'error',
