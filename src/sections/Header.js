@@ -4,6 +4,7 @@ import createEventList from '../pages/EventList.js' // Asegúrate de tener las v
 import createUserProfile from '../pages/UserProfile.js' // Asegúrate de tener las vistas correctas
 import createHome from '../pages/Home.js'
 import createLoginForm from '../pages/Login.js' // Asegúrate de que la ruta sea correcta
+import createRegisterForm from '../pages/Register.js' // Asegúrate de que la ruta sea correcta
 
 function createHeader() {
   const header = document.createElement('header')
