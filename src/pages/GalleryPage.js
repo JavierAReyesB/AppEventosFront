@@ -3,15 +3,6 @@ import createLoader from '../components/Loader.js' // Importar la función del l
 import '../styles/Gallery.css' // Importar los estilos de la galería
 
 async function createGalleryPage() {
-  // Selecciona el main o el contenedor principal donde se inserta la galería
-  const main = document.querySelector('main.custom-main')
-
-  // Verifica si ya existe un contenedor de la galería y elimínalo si es necesario
-  const existingGalleryContainer = main.querySelector('.gallery-page-container')
-  if (existingGalleryContainer) {
-    existingGalleryContainer.remove()
-  }
-
   const container = document.createElement('div')
   container.classList.add('gallery-page-container')
 
@@ -22,19 +13,15 @@ async function createGalleryPage() {
 
   // Mostrar loader mientras se cargan los eventos
   const loader = createLoader()
-  container.appendChild(loader)
+  document.body.appendChild(loader) // Añadir el loader al body para asegurar su visibilidad
 
   // Llamar a la función que crea la galería
   const gallery = await createGallery()
 
   // Remover el loader una vez que la galería ha sido cargada
-  container.removeChild(loader)
+  document.body.removeChild(loader)
 
-  // Agregar la galería
   container.appendChild(gallery)
-
-  // Agregar el nuevo contenedor al main
-  main.appendChild(container)
 
   return container
 }
