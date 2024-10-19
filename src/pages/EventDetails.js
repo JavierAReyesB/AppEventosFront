@@ -1,17 +1,15 @@
 import '../styles/EventDetails.css'
 import createButton from '../components/Button.js'
-import createReviewSection from '../sections/ReviewSection.js' // Importamos el nuevo ReviewSection.js
-import fetchApi from '../services/apiService.js' // Importamos la función reutilizable fetchApi
-import { displayError, clearError } from '../utils/errorHandler.js' // Importamos las funciones de manejo de errores
-import { showToast } from '../utils/notification.js' // Importamos la función de notificación
+import createReviewSection from '../sections/ReviewSection.js'
+import fetchApi from '../services/apiService.js'
+import { displayError, clearError } from '../utils/errorHandler.js'
+import { showToast } from '../utils/notification.js'
 
-// Obtener la URL del backend desde las variables de entorno
-const backendUrl = import.meta.env.VITE_APP_BACKEND_URL // Esta línea va aquí, justo después de las importaciones
-// Función para obtener los detalles de un evento desde la API
-// Función para obtener los detalles de un evento desde la API
+const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
+
 async function fetchEventDetails(eventId) {
   try {
-    return await fetchApi(`${backendUrl}/api/events/${eventId}`, 'GET') // Usamos fetchApi con la URL del backend dinámica
+    return await fetchApi(`${backendUrl}/api/events/${eventId}`, 'GET')
   } catch (error) {
     console.error('Error al obtener los detalles del evento:', error)
     showToast('Error al cargar los detalles del evento.', 'error', 'center')
@@ -19,7 +17,6 @@ async function fetchEventDetails(eventId) {
   }
 }
 
-// Función para inscribirse al evento
 async function attendEvent(eventId, token, errorMessageElement) {
   try {
     await fetchApi(
@@ -27,10 +24,9 @@ async function attendEvent(eventId, token, errorMessageElement) {
       'POST',
       null,
       token
-    ) // Usamos fetchApi con la URL dinámica
-
-    showToast('Te has inscrito con éxito al evento', 'success', 'center') // Notificación de éxito
-    window.navigateTo(`/events/${eventId}`) // Redirigir a los detalles del evento
+    )
+    showToast('Te has inscrito con éxito al evento', 'success', 'center')
+    window.navigateTo(`/events/${eventId}`)
   } catch (error) {
     console.error('Error al inscribirse al evento:', error)
     displayError(
@@ -42,11 +38,10 @@ async function attendEvent(eventId, token, errorMessageElement) {
       'Error al inscribirse al evento. Intente de nuevo.',
       'error',
       'center'
-    ) // Notificación de error
+    )
   }
 }
 
-// Función para crear la vista de detalles del evento
 async function createEventDetails(eventId) {
   const container = document.createElement('div')
   container.classList.add('event-details-container')
@@ -77,7 +72,6 @@ async function createEventDetails(eventId) {
   description.textContent = event.description
   container.appendChild(description)
 
-  // Si el evento tiene un poster, lo mostramos
   if (event.poster) {
     const image = document.createElement('img')
     image.src = event.poster
@@ -86,7 +80,6 @@ async function createEventDetails(eventId) {
     container.appendChild(image)
   }
 
-  // Mostrar la lista de asistentes
   const attendeesList = document.createElement('div')
   attendeesList.classList.add('attendees-list')
 
@@ -110,22 +103,20 @@ async function createEventDetails(eventId) {
 
   container.appendChild(attendeesList)
 
-  // Verificar el rol del usuario y si el evento ha pasado
   const token = localStorage.getItem('token')
   let userRole = null
   let userId = null
   const today = new Date()
 
   if (token) {
-    const decoded = jwt_decode(token) // Decodificamos el token del usuario
+    const decoded = jwt_decode(token)
     userRole = decoded.role
     userId = decoded.id
   }
 
   const eventDate = new Date(event.date)
-  const isEventPast = eventDate < today // Verificar si el evento ya ha pasado
+  const isEventPast = eventDate < today
 
-  // Si el usuario es organizador o administrador, mostrar botones de editar y eliminar
   if (userRole === 'organizer' || userRole === 'admin') {
     const deleteButton = createButton({
       text: 'Eliminar Evento',
@@ -133,13 +124,12 @@ async function createEventDetails(eventId) {
         if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
           try {
             await fetchApi(
-              `${backendUrl}/api/events/${eventId}`, // Usamos la URL dinámica del backend
+              `${backendUrl}/api/events/${eventId}`,
               'DELETE',
               null,
               token
             )
-
-            showToast('Evento eliminado exitosamente', 'success', 'center') // Notificación de éxito
+            showToast('Evento eliminado exitosamente', 'success', 'center')
             window.navigateTo('/events')
           } catch (error) {
             console.error('Error al eliminar el evento:', error)
@@ -148,7 +138,7 @@ async function createEventDetails(eventId) {
               errorMessageElement,
               'network'
             )
-            showToast('Error al eliminar el evento.', 'error', 'center') // Notificación de error
+            showToast('Error al eliminar el evento.', 'error', 'center')
           }
         }
       },
@@ -167,7 +157,6 @@ async function createEventDetails(eventId) {
     container.appendChild(deleteButton)
   }
 
-  // Si el usuario es un "user", verificar si ya está inscrito y si el evento ha pasado
   if (userRole === 'user' && !isEventPast) {
     const isUserRegistered = event.attendees.some(
       (attendee) => attendee._id === userId
@@ -192,8 +181,7 @@ async function createEventDetails(eventId) {
     container.appendChild(eventPassedMessage)
   }
 
-  // Añadir la sección de reseñas al final de los detalles del evento, pasando event.attendees
-  const attendeesIds = event.attendees.map((attendee) => attendee._id) // Obtener los IDs de los asistentes
+  const attendeesIds = event.attendees.map((attendee) => attendee._id)
   const reviewSection = await createReviewSection(eventId, attendeesIds)
   container.appendChild(reviewSection)
 

@@ -3,13 +3,12 @@ import '../styles/EventList.css'
 import createLoader from '../components/Loader.js'
 import fetchApi from '../services/apiService.js'
 import { showToast } from '../utils/notification.js'
-import { displayError, clearError } from '../utils/errorHandler.js' // Añadimos el errorHandler
+import { displayError, clearError } from '../utils/errorHandler.js'
 import {
   filterEventsByLocation,
   sortEventsByDate
 } from '../utils/filterAndSort.js'
 
-// Obtener la URL del backend desde las variables de entorno
 const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
 
 function formatDate(dateString) {
@@ -53,16 +52,12 @@ function createCard(event) {
   detailButton.textContent = 'Ver detalles'
   detailButton.classList.add('card-button')
   detailButton.addEventListener('click', () => {
-    // Agregar loader al body
     const loader = createLoader()
     document.body.appendChild(loader)
 
-    // Cambia la URL sin recargar la página
     window.history.pushState({}, '', `/events/${event._id}`)
 
-    // Llama a la función navigateTo para gestionar la navegación y cargar el contenido
     window.navigateTo(`/events/${event._id}`).then(() => {
-      // Remover loader una vez cargados los detalles del evento
       document.body.removeChild(loader)
     })
   })
@@ -75,7 +70,6 @@ function createCard(event) {
   return card
 }
 
-// Función para obtener las ubicaciones únicas de los eventos
 function getUniqueLocations(events) {
   const locations = events.map((event) => event.location)
   return [...new Set(locations)]
@@ -108,7 +102,6 @@ async function createEventList() {
   title.textContent = 'Lista de Eventos'
   container.appendChild(title)
 
-  // Crear el área de filtrado
   const filterContainer = document.createElement('div')
   filterContainer.classList.add('filter-container')
 

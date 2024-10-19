@@ -2,9 +2,8 @@ import '../styles/EditEventForm.css'
 import fetchApi from '../services/apiService'
 import { createForm } from '../components/Form'
 import { displayError, clearError } from '../utils/errorHandler'
-import { showToast } from '../utils/notification' // Importar la función de notificación
+import { showToast } from '../utils/notification'
 
-// Obtener la URL del backend desde las variables de entorno
 const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
 
 function editEventForm(eventId) {
@@ -15,11 +14,10 @@ function editEventForm(eventId) {
   title.textContent = 'Editar Evento'
   container.appendChild(title)
 
-  const errorMessage = document.createElement('div') // Elemento para mostrar errores
-  errorMessage.classList.add('error-message') // Clase CSS para estilo de error
+  const errorMessage = document.createElement('div')
+  errorMessage.classList.add('error-message')
   container.appendChild(errorMessage)
 
-  // Configuramos los campos del formulario utilizando la función createForm
   const fields = [
     { type: 'text', name: 'title', label: 'Título del Evento' },
     { type: 'date', name: 'date', label: 'Fecha del Evento' },
@@ -35,40 +33,34 @@ function editEventForm(eventId) {
 
   const onSubmit = async (formDataObj) => {
     try {
-      clearError(errorMessage) // Limpiar cualquier error previo
+      clearError(errorMessage)
       const token = localStorage.getItem('token')
 
-      // Crear una instancia de FormData
       const formData = new FormData()
 
-      // Rellenar el FormData con los valores del formulario
       for (let [key, value] of Object.entries(formDataObj)) {
         if (key === 'poster' && value.files && value.files.length > 0) {
           console.log('Poster seleccionado:', value.files[0])
-          formData.append(key, value.files[0]) // Añadir el archivo de la imagen al FormData
+          formData.append(key, value.files[0])
         } else {
-          formData.append(key, value) // Añadir otros campos al FormData
+          formData.append(key, value)
         }
       }
 
-      // Verificación en consola de los datos que se están enviando
       for (let [key, value] of formData.entries()) {
         console.log(`${key}: ${value}`)
       }
 
-      // Realizamos la solicitud PUT para editar el evento
       await fetchApi(
-        `${backendUrl}/api/events/${eventId}`, // Usamos el eventId y la URL del backend
-        'PUT', // Método PUT para editar
+        `${backendUrl}/api/events/${eventId}`,
+        'PUT',
         formData,
         token,
-        true // Indicamos que estamos enviando FormData
+        true
       )
 
-      // Mostrar notificación de éxito
       showToast('Evento editado con éxito!', 'success', 'center')
 
-      // Redirigir al usuario después de un tiempo
       setTimeout(() => {
         window.navigateTo('/events')
       }, 1000)
@@ -80,7 +72,6 @@ function editEventForm(eventId) {
         'form'
       )
 
-      // Mostrar notificación de error
       showToast(
         'Error al editar el evento. Intente de nuevo.',
         'error',
@@ -89,7 +80,6 @@ function editEventForm(eventId) {
     }
   }
 
-  // Usamos createForm para generar el formulario
   const form = createForm(fields, onSubmit, 'form-class', 'Guardar Cambios')
   container.appendChild(form)
 

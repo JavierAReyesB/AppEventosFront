@@ -1,23 +1,19 @@
 import '../styles/Home.css'
-import createHero from '../sections/Hero.js' // Importar el Hero
-import { showToast } from '../utils/notification.js' // Importamos la función de notificación
+import createHero from '../sections/Hero.js'
+import { showToast } from '../utils/notification.js'
 
 function createHome() {
   const container = document.createElement('div')
   container.classList.add('home-container')
 
-  // Integrar el Hero antes del banner
   try {
-    const hero = createHero() // Crear el hero sin necesidad de async/await
+    const hero = createHero()
     container.appendChild(hero)
   } catch (error) {
     console.error('Error al cargar el hero:', error)
-
-    // Mostrar notificación de error si no se puede cargar el Hero
     showToast('Error al cargar la sección principal.', 'error', 'center')
   }
 
-  // Crear el banner (sin imagen)
   const banner = document.createElement('div')
   banner.classList.add('banner')
 

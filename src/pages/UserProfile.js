@@ -1,8 +1,8 @@
-import '../styles/UserProfile.css' // Asegúrate de que la ruta sea correcta
-import createAttendedEvents from '../components/AttendedEvents.js' // Importamos el componente de eventos asistidos
-import createUpcomingEvents from '../components/UpcomingEvents.js' // Importamos el componente de eventos futuros
-import { showToast } from '../utils/notification.js' // Importamos la función de notificación
-import { displayError, clearError } from '../utils/errorHandler.js' // Importamos el manejador de errores
+import '../styles/UserProfile.css'
+import createAttendedEvents from '../components/AttendedEvents.js'
+import createUpcomingEvents from '../components/UpcomingEvents.js'
+import { showToast } from '../utils/notification.js'
+import { displayError, clearError } from '../utils/errorHandler.js'
 
 function createUserProfile() {
   const userProfileContainer = document.createElement('div')
@@ -17,12 +17,10 @@ function createUserProfile() {
 
   if (token) {
     try {
-      userData = jwt_decode(token) // Usar jwt_decode global desde el CDN
+      userData = jwt_decode(token)
       console.log('Datos del token:', userData)
     } catch (error) {
       console.error('Error al decodificar el token', error)
-
-      // Manejamos el error con displayError y showToast
       displayError(
         'Error al cargar los datos del usuario.',
         userProfileContainer,
@@ -32,7 +30,6 @@ function createUserProfile() {
       return userProfileContainer
     }
   } else {
-    // Manejamos el error si no se encuentra un token
     displayError(
       'No se encontró un token de usuario.',
       userProfileContainer,
@@ -54,7 +51,6 @@ function createUserProfile() {
   userInfo.appendChild(userName)
   userInfo.appendChild(userEmail)
 
-  // Botón para editar el perfil
   const editProfileButton = createButton('Editar Perfil', () => {
     showToast(
       'Funcionalidad de edición de perfil próximamente.',
@@ -64,7 +60,6 @@ function createUserProfile() {
     console.log('Editar perfil')
   })
 
-  // Botón para cambiar la contraseña
   const changePasswordButton = createButton('Cambiar Contraseña', () => {
     showToast(
       'Funcionalidad para cambiar la contraseña próximamente.',
@@ -78,11 +73,9 @@ function createUserProfile() {
   userInfo.appendChild(changePasswordButton)
 
   userProfileContainer.appendChild(userInfo)
-
-  // Añadimos la lista de eventos asistidos en el perfil
   ;(async () => {
     try {
-      const attendedEventsContainer = await createAttendedEvents() // Llamamos a la función que crea la lista de eventos asistidos
+      const attendedEventsContainer = await createAttendedEvents()
       userProfileContainer.appendChild(attendedEventsContainer)
     } catch (error) {
       console.error('Error al cargar eventos asistidos:', error)
@@ -98,11 +91,9 @@ function createUserProfile() {
       )
     }
   })()
-
-  // Añadimos la lista de eventos futuros en el perfil
   ;(async () => {
     try {
-      const upcomingEventsContainer = await createUpcomingEvents() // Llamamos a la función que crea la lista de eventos futuros
+      const upcomingEventsContainer = await createUpcomingEvents()
       userProfileContainer.appendChild(upcomingEventsContainer)
     } catch (error) {
       console.error('Error al cargar eventos futuros:', error)
