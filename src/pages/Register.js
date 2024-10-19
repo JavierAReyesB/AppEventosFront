@@ -3,6 +3,7 @@ import { registerUser } from '../services/authService.js'
 import { createForm } from '../components/Form.js' // Importamos el nuevo Form.js
 import { displayError, clearError } from '../utils/errorHandler.js' // Importamos el manejador de errores
 import { showToast } from '../utils/notification.js' // Importamos la función de notificación
+import createHeader from '../sections/Header.js' // Asegúrate de importar createHeader
 
 function createRegisterForm() {
   const registerContainer = document.createElement('div')
@@ -55,9 +56,12 @@ function createRegisterForm() {
 
         localStorage.setItem('token', response.token) // Guardar token si es necesario
 
+        // *** Aquí actualizamos el header después del registro ***
+        const newHeader = createHeader()
+        document.querySelector('header').replaceWith(newHeader)
+
         setTimeout(() => {
-          window.location.href = '/profile'
-          // Redirigir al perfil de usuario después de 1 segundo
+          window.location.href = '/profile' // Redirigir al perfil de usuario
         }, 1000)
       } catch (error) {
         displayError(
