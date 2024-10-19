@@ -57,6 +57,10 @@ function createHeader() {
       setTimeout(() => {
         window.history.pushState({}, '', '/') // Redirigir al inicio sin recargar la página
         handleRouting('/') // Aseguramos que la página inicial se cargue correctamente
+
+        // *** Actualizar el header ***
+        const newHeader = createHeader()
+        document.querySelector('header').replaceWith(newHeader)
       }, 1000) // 1 segundo de retraso para que se vea la notificación
     })
 
