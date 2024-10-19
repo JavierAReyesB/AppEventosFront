@@ -67,7 +67,8 @@ function getUniqueLocations(events) {
 
 async function fetchEvents() {
   try {
-    return await fetchApi('http://localhost:5000/api/events', 'GET')
+    const backendUrl = import.meta.env.VITE_APP_BACKEND_URL // Obtener la URL del backend desde variables de entorno
+    return await fetchApi(`${backendUrl}/api/events`, 'GET') // Usar la URL dinámica
   } catch (error) {
     console.error('Error al obtener los eventos:', error)
 
