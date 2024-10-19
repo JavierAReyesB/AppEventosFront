@@ -2,7 +2,7 @@ import '../styles/Header.css'
 import { showToast } from '../utils/notification.js'
 import createEventList from '../pages/EventList.js'
 import createUserProfile from '../pages/UserProfile.js'
-import createHomePage from '../pages/HomePage.js'
+import createHome from '../pages/Home.js' // Corrige importación desde Home.js
 import createGalleryPage from '../pages/GalleryPage.js'
 
 function createHeader() {
@@ -100,7 +100,6 @@ function createNavLink(href, text) {
     e.preventDefault()
     window.history.pushState({}, '', href)
     handleRouting(href)
-    window.location.reload() // Forzar un refresh de la página después del cambio de URL
   })
   return link
 }
@@ -124,7 +123,7 @@ async function handleRouting(path) {
       app.appendChild(galleryPage)
     } else if (path === '/') {
       console.log('Cargando página de inicio')
-      const homePage = createHomePage()
+      const homePage = createHome() // Cambiamos a createHome
       app.appendChild(homePage)
     } else {
       console.log('Cargando 404: Página no encontrada')
@@ -138,14 +137,6 @@ async function handleRouting(path) {
     errorMessage.textContent = `Error al cargar la página ${path}`
     app.appendChild(errorMessage)
   }
-}
-
-function createHomePage() {
-  const homePage = document.createElement('div')
-  const title = document.createElement('h1')
-  title.textContent = 'Bienvenido a EventosApp'
-  homePage.appendChild(title)
-  return homePage
 }
 
 window.addEventListener('popstate', function () {
