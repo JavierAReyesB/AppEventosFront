@@ -3,6 +3,7 @@ import { showToast } from '../utils/notification.js' // Importamos la función s
 import createEventList from '../pages/EventList.js' // Asegúrate de tener las vistas correctas
 import createUserProfile from '../pages/UserProfile.js' // Asegúrate de tener las vistas correctas
 import createHome from '../pages/Home.js'
+import createLoginForm from '../pages/Login.js' // Asegúrate de que la ruta sea correcta
 
 function createHeader() {
   const header = document.createElement('header')
