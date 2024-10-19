@@ -9,7 +9,7 @@ function createLoader() {
 
   const loaderText = document.createElement('p')
   loaderText.classList.add('loader-text')
-  loaderText.textContent = 'Cargando eventos...'
+  loaderText.textContent = 'Cargando ...'
 
   loaderContainer.appendChild(loader)
   loaderContainer.appendChild(loaderText)
