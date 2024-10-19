@@ -1,67 +1,54 @@
-import '../styles/Header.css' // Asegúrate de que la ruta sea correcta
-import { showToast } from '../utils/notification.js' // Importamos la función showToast
-import createEventList from '../components/EventList.js' // Asegúrate de tener las vistas correctas
-import createUserProfile from '../components/UserProfile.js' // Asegúrate de tener las vistas correctas
-import createHomePage from '../components/HomePage.js' // Si tienes una página de inicio
-import createGalleryPage from '../components/GalleryPage.js' // Asegúrate de que la ruta sea correcta
+import '../styles/Header.css'
+import { showToast } from '../utils/notification.js'
+import createEventList from '../components/EventList.js'
+import createUserProfile from '../components/UserProfile.js'
+import createHomePage from '../components/HomePage.js'
+import createGalleryPage from '../components/GalleryPage.js'
 
 function createHeader() {
   const header = document.createElement('header')
   header.classList.add('header')
 
-  // Logo que redirecciona a la página principal
   const logo = document.createElement('a')
   logo.href = '/'
   logo.textContent = 'EventosApp'
   logo.classList.add('logo')
 
-  // Contenedor para la navegación
   const nav = document.createElement('nav')
   nav.classList.add('main-nav')
 
-  // Enlaces de navegación
   const homeLink = createNavLink('/', 'Inicio')
-  const eventsLink = createNavLink('/events', 'Eventos', true) // Añadimos el refresh
-  const galleryLink = createNavLink('/gallery', 'Galería', true) // Añadimos el refresh
+  const eventsLink = createNavLink('/events', 'Eventos')
+  const galleryLink = createNavLink('/gallery', 'Galería')
   nav.appendChild(homeLink)
   nav.appendChild(eventsLink)
   nav.appendChild(galleryLink)
 
-  // Contenedor para la gestión del usuario
   const userDiv = document.createElement('div')
   userDiv.classList.add('user-options')
 
-  // Verificar si hay un token en localStorage para determinar si el usuario está autenticado
   const token = localStorage.getItem('token')
 
   if (token) {
-    const decodedToken = jwt_decode(token) // Usamos jwt_decode desde el script del CDN
+    const decodedToken = jwt_decode(token)
     const userProfileLink = createNavLink('/profile', 'Mi Perfil')
     const logoutLink = document.createElement('a')
     logoutLink.textContent = 'Cerrar Sesión'
     logoutLink.href = '#'
 
-    // Evento para cerrar sesión
     logoutLink.addEventListener('click', (e) => {
       e.preventDefault()
-
-      // Eliminar el token del localStorage
       localStorage.removeItem('token')
-
-      // Notificación con showToast
       showToast('Sesión cerrada con éxito.', 'success', 'center')
-
-      // Redirigir al inicio después de un breve retraso
       setTimeout(() => {
-        window.history.pushState({}, '', '/') // Redirigir al inicio sin recargar la página
-        handleRouting('/') // Aseguramos que la página inicial se cargue correctamente
-      }, 1000) // 1 segundo de retraso para que se vea la notificación
+        window.history.pushState({}, '', '/')
+        handleRouting('/')
+      }, 1000)
     })
 
     userDiv.appendChild(userProfileLink)
     userDiv.appendChild(logoutLink)
 
-    // Si el usuario es organizador o admin, agregar enlace de crear evento
     if (decodedToken.role === 'organizer' || decodedToken.role === 'admin') {
       const createEventLink = createNavLink(
         '/events/create-event',
@@ -73,14 +60,12 @@ function createHeader() {
     const loginLink = createNavLink('/login', 'Iniciar Sesión')
     const registerLink = createNavLink('/register', 'Registrarse')
 
-    // Evento para el botón de "Iniciar Sesión"
     loginLink.addEventListener('click', (e) => {
       e.preventDefault()
       window.history.pushState({}, '', '/login')
       handleRouting('/login')
     })
 
-    // Evento para el botón de "Registrarse"
     registerLink.addEventListener('click', (e) => {
       e.preventDefault()
       window.history.pushState({}, '', '/register')
@@ -91,17 +76,14 @@ function createHeader() {
     userDiv.appendChild(registerLink)
   }
 
-  // Crear el ícono de menú hamburguesa para pantallas pequeñas
   const hamburgerMenu = document.createElement('div')
   hamburgerMenu.classList.add('hamburger-menu')
-  hamburgerMenu.innerHTML = '☰' // Ícono de menú hamburguesa
+  hamburgerMenu.innerHTML = '☰'
 
-  // Evento para mostrar/ocultar el menú en pantallas pequeñas
   hamburgerMenu.addEventListener('click', () => {
-    nav.classList.toggle('active') // Mostrar u ocultar el menú
+    nav.classList.toggle('active')
   })
 
-  // Añadir el ícono de menú al header
   header.appendChild(logo)
   header.appendChild(nav)
   header.appendChild(hamburgerMenu)
@@ -110,29 +92,22 @@ function createHeader() {
   return header
 }
 
-function createNavLink(href, text, shouldRefresh = false) {
+function createNavLink(href, text) {
   const link = document.createElement('a')
   link.href = href
   link.textContent = text
   link.addEventListener('click', (e) => {
     e.preventDefault()
-
-    // Cambiar la URL sin recargar la página
     window.history.pushState({}, '', href)
-
-    // Si se requiere, forzar el refresh de la página
-    if (shouldRefresh) {
-      window.location.reload() // Refresca la página al hacer clic
-    } else {
-      handleRouting(href)
-    }
+    handleRouting(href)
+    window.location.reload() // Forzar un refresh de la página después del cambio de URL
   })
   return link
 }
 
 async function handleRouting(path) {
   const app = document.getElementById('app-container')
-  app.innerHTML = '' // Limpiamos el contenido anterior
+  app.innerHTML = ''
 
   try {
     if (path === '/events') {
@@ -165,7 +140,6 @@ async function handleRouting(path) {
   }
 }
 
-// Funciones para cargar páginas (debes asegurarte de que existan)
 function createHomePage() {
   const homePage = document.createElement('div')
   const title = document.createElement('h1')
@@ -174,13 +148,11 @@ function createHomePage() {
   return homePage
 }
 
-// Detectar cambios en la URL (cuando el usuario use los botones de adelante/atrás del navegador)
 window.addEventListener('popstate', function () {
   const currentPath = window.location.pathname
   handleRouting(currentPath)
 })
 
-// Cargar la página al inicio
 window.addEventListener('DOMContentLoaded', function () {
   const currentPath = window.location.pathname
   handleRouting(currentPath)
