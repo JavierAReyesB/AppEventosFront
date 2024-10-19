@@ -19,12 +19,31 @@ function createEventForm() {
   errorMessage.classList.add('error-message') // Añadir clase CSS para estilo de error
   container.appendChild(errorMessage)
 
-  // Definimos los campos del formulario
+  // Definimos los campos del formulario con sus placeholders (excepto para fecha y poster)
   const fields = [
-    { type: 'text', name: 'title', label: 'Título del Evento' },
-    { type: 'date', name: 'date', label: 'Fecha del Evento' },
-    { type: 'text', name: 'location', label: 'Ubicación del Evento' },
-    { type: 'textarea', name: 'description', label: 'Descripción del Evento' },
+    {
+      type: 'text',
+      name: 'title',
+      label: 'Título del Evento',
+      placeholder: 'Ingresa el título del evento'
+    },
+    {
+      type: 'date',
+      name: 'date',
+      label: 'Fecha del Evento'
+    },
+    {
+      type: 'text',
+      name: 'location',
+      label: 'Ubicación del Evento',
+      placeholder: 'Ingresa la ubicación del evento'
+    },
+    {
+      type: 'textarea',
+      name: 'description',
+      label: 'Descripción del Evento',
+      placeholder: 'Escribe una breve descripción del evento'
+    },
     {
       type: 'file',
       name: 'poster',
