@@ -54,9 +54,10 @@ function createCard(event) {
   detailButton.addEventListener('click', () => {
     // Cambia la URL sin recargar la página
     window.history.pushState({}, '', `/events/${event._id}`)
-    // Llama a la función para cargar los detalles del evento
-    loadEventDetails(event._id)
+    // Llama a la función navigateTo para gestionar la navegación y cargar el contenido
+    window.navigateTo(`/events/${event._id}`)
   })
+
   cardContent.appendChild(detailButton)
 
   card.appendChild(overlay)
