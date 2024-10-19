@@ -6,6 +6,7 @@ import createHome from '../pages/Home.js'
 import createLoginForm from '../pages/Login.js' // Asegúrate de que la ruta sea correcta
 import createRegisterForm from '../pages/Register.js' // Asegúrate de que la ruta sea correcta
 import createGalleryPage from '../pages/GalleryPage.js'
+import createEventForm from '../pages/CreateEventForm.js' // Asegúrate de que la ruta sea correcta
 
 function createHeader() {
   const header = document.createElement('header')
@@ -163,6 +164,11 @@ function handleRouting(path) {
     console.log('Cargando formulario de registro')
     const registerForm = createRegisterForm()
     main.appendChild(registerForm)
+  } else if (path === '/events/create-event') {
+    // Añadimos el manejo para crear eventos
+    console.log('Cargando formulario de creación de eventos')
+    const eventForm = createEventForm() // Llamamos a la función que crea el formulario de eventos
+    main.appendChild(eventForm)
   } else {
     console.log('Cargando 404: Página no encontrada')
     const notFound = document.createElement('h1')
