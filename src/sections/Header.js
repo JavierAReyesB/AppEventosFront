@@ -122,26 +122,26 @@ function createNavLink(href, text) {
   return link
 }
 
-// Función para manejar la navegación basada en la URL
 function handleRouting(path) {
-  const app = document.getElementById('app-container') // El contenedor principal de la página
-  app.innerHTML = '' // Limpiamos el contenido anterior
+  console.log(`Navegando a: ${path}`) // Añade esta línea para verificar
+  const app = document.getElementById('app-container')
+  app.innerHTML = ''
 
   if (path === '/events') {
-    // Cargar la vista de eventos
+    console.log('Cargando vista de eventos')
     createEventList().then((eventList) => {
       app.appendChild(eventList)
     })
   } else if (path === '/profile') {
-    // Cargar el perfil del usuario
+    console.log('Cargando perfil del usuario')
     const userProfile = createUserProfile()
     app.appendChild(userProfile)
   } else if (path === '/') {
-    // Cargar la página de inicio
+    console.log('Cargando página de inicio')
     const homePage = createHomePage()
     app.appendChild(homePage)
   } else {
-    // Si no hay coincidencia, cargar una página de "No encontrado"
+    console.log('Cargando 404: Página no encontrada')
     const notFound = document.createElement('h1')
     notFound.textContent = '404: Página no encontrada'
     app.appendChild(notFound)
