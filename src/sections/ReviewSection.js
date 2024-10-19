@@ -2,6 +2,7 @@ import '../styles/ReviewSection.css' // Asegúrate de que el archivo CSS esté c
 import fetchApi from '../services/apiService' // Importamos la función fetchApi
 import { createForm } from '../components/Form.js' // Importamos el nuevo formulario reutilizable
 import { showToast } from '../utils/notification.js' // Importamos la función de notificación
+import { displayError, clearError } from '../utils/errorHandler.js' // Importamos el errorHandler
 
 // Obtener la URL del backend desde las variables de entorno
 const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
@@ -12,6 +13,7 @@ async function fetchReviews(eventId) {
     return await fetchApi(`${backendUrl}/api/reviews/event/${eventId}`)
   } catch (error) {
     console.error('Error:', error)
+    displayError('Error al obtener las reseñas.', document.body, 'network')
     showToast('Error al obtener las reseñas.', 'error', 'center')
     throw new Error('Error al obtener las reseñas del evento')
   }
@@ -34,6 +36,7 @@ async function addReview(eventId, reviewData) {
     showToast('Reseña agregada con éxito.', 'success', 'center')
   } catch (error) {
     console.error('Error al agregar la reseña:', error)
+    displayError('Error al agregar la reseña.', document.body, 'form')
     showToast('Error al agregar la reseña.', 'error', 'center')
   }
 }
@@ -54,6 +57,7 @@ async function modifyReview(eventId, reviewId, reviewData) {
     showToast('Reseña modificada con éxito.', 'success', 'center')
   } catch (error) {
     console.error('Error al modificar la reseña:', error)
+    displayError('Error al modificar la reseña.', document.body, 'form')
     showToast('Error al modificar la reseña.', 'error', 'center')
   }
 }
@@ -78,6 +82,7 @@ async function deleteReview(reviewId, reviewElement, eventId) {
     showToast('Reseña eliminada con éxito.', 'success', 'center')
   } catch (error) {
     console.error('Error al eliminar la reseña:', error)
+    displayError('Error al eliminar la reseña.', document.body, 'network')
     showToast('Error al eliminar la reseña.', 'error', 'center')
   }
 }
