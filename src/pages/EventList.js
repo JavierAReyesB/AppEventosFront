@@ -8,6 +8,9 @@ import {
   sortEventsByDate
 } from '../utils/filterAndSort.js' // Importamos las funciones de filtro y ordenación
 
+// Obtener la URL del backend desde las variables de entorno
+const backendUrl = import.meta.env.VITE_APP_BACKEND_URL // Esta línea va aquí, justo después de las importaciones
+
 function formatDate(dateString) {
   const options = { year: 'numeric', month: 'long', day: 'numeric' }
   return new Date(dateString).toLocaleDateString('es-ES', options)
