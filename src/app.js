@@ -14,11 +14,23 @@ import createGallery from './pages/GalleryPage.js' // Importar la página de la 
 async function initializeApp() {
   const appContainer = document.getElementById('app-container')
 
+  // Crear y loguear header
   const header = createHeader()
-  const main = createMain()
-  const footer = createFooter()
+  console.log('Header creado:', header)
 
+  // Crear y loguear main
+  const main = createMain()
+  console.log('Main creado:', main)
+
+  // Crear y loguear footer
+  const footer = createFooter()
+  console.log('Footer creado:', footer)
+
+  // Añadir header, main, y footer al contenedor
   appContainer.appendChild(header)
+  appContainer.appendChild(main)
+  appContainer.appendChild(footer)
+  console.log('Header, main y footer añadidos a appContainer:', appContainer)
 
   const navigateTo = async (path) => {
     console.log(`Navegando a: ${path}`) // Añadir log para ver a qué ruta se está intentando navegar
@@ -111,9 +123,6 @@ async function initializeApp() {
   }
 
   window.navigateTo = navigateTo
-
-  appContainer.appendChild(main)
-  appContainer.appendChild(footer)
 
   await navigateTo(window.location.pathname)
 
