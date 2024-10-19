@@ -21,8 +21,8 @@ function createHeader() {
 
   // Enlaces de navegación
   const homeLink = createNavLink('/', 'Inicio')
-  const eventsLink = createNavLink('/events', 'Eventos')
-  const galleryLink = createNavLink('/gallery', 'Galería') // Nuevo enlace a la galería
+  const eventsLink = createNavLink('/events', 'Eventos', true) // Añadimos el refresh
+  const galleryLink = createNavLink('/gallery', 'Galería', true) // Añadimos el refresh
   nav.appendChild(homeLink)
   nav.appendChild(eventsLink)
   nav.appendChild(galleryLink)
@@ -110,7 +110,7 @@ function createHeader() {
   return header
 }
 
-function createNavLink(href, text) {
+function createNavLink(href, text, shouldRefresh = false) {
   const link = document.createElement('a')
   link.href = href
   link.textContent = text
@@ -120,43 +120,48 @@ function createNavLink(href, text) {
     // Cambiar la URL sin recargar la página
     window.history.pushState({}, '', href)
 
-    // Llamar a la función para cargar la nueva vista
-    handleRouting(href)
+    // Si se requiere, forzar el refresh de la página
+    if (shouldRefresh) {
+      window.location.reload() // Refresca la página al hacer clic
+    } else {
+      handleRouting(href)
+    }
   })
   return link
 }
 
-function handleRouting(path) {
-  const app = document.getElementById('app-container') // Usamos el ID 'app-container' como contenedor principal
+async function handleRouting(path) {
+  const app = document.getElementById('app-container')
   app.innerHTML = '' // Limpiamos el contenido anterior
 
-  if (path === '/events') {
-    console.log('Cargando vista de eventos')
-    createEventList()
-      .then((eventList) => {
-        app.appendChild(eventList)
-      })
-      .catch((error) => {
-        console.error('Error al cargar la vista de eventos:', error)
-      })
-  } else if (path === '/profile') {
-    console.log('Cargando perfil del usuario')
-    const userProfile = createUserProfile()
-    app.appendChild(userProfile)
-  } else if (path === '/gallery') {
-    console.log('Cargando galería de eventos')
-    createGalleryPage().then((galleryPage) => {
+  try {
+    if (path === '/events') {
+      console.log('Cargando vista de eventos')
+      const eventList = await createEventList()
+      app.appendChild(eventList)
+    } else if (path === '/profile') {
+      console.log('Cargando perfil del usuario')
+      const userProfile = createUserProfile()
+      app.appendChild(userProfile)
+    } else if (path === '/gallery') {
+      console.log('Cargando galería de eventos')
+      const galleryPage = await createGalleryPage()
       app.appendChild(galleryPage)
-    })
-  } else if (path === '/') {
-    console.log('Cargando página de inicio')
-    const homePage = createHomePage()
-    app.appendChild(homePage)
-  } else {
-    console.log('Cargando 404: Página no encontrada')
-    const notFound = document.createElement('h1')
-    notFound.textContent = '404: Página no encontrada'
-    app.appendChild(notFound)
+    } else if (path === '/') {
+      console.log('Cargando página de inicio')
+      const homePage = createHomePage()
+      app.appendChild(homePage)
+    } else {
+      console.log('Cargando 404: Página no encontrada')
+      const notFound = document.createElement('h1')
+      notFound.textContent = '404: Página no encontrada'
+      app.appendChild(notFound)
+    }
+  } catch (error) {
+    console.error(`Error cargando la ruta ${path}:`, error)
+    const errorMessage = document.createElement('p')
+    errorMessage.textContent = `Error al cargar la página ${path}`
+    app.appendChild(errorMessage)
   }
 }
 
