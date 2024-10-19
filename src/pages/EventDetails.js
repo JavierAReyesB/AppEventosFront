@@ -6,9 +6,10 @@ import { displayError, clearError } from '../utils/errorHandler.js' // Importamo
 import { showToast } from '../utils/notification.js' // Importamos la función de notificación
 
 // Función para obtener los detalles de un evento desde la API
+// Función para obtener los detalles de un evento desde la API
 async function fetchEventDetails(eventId) {
   try {
-    return await fetchApi(`http://localhost:5000/api/events/${eventId}`, 'GET') // Usamos fetchApi
+    return await fetchApi(`${backendUrl}/api/events/${eventId}`, 'GET') // Usamos fetchApi con la URL del backend dinámica
   } catch (error) {
     console.error('Error al obtener los detalles del evento:', error)
     showToast('Error al cargar los detalles del evento.', 'error', 'center')
@@ -20,11 +21,11 @@ async function fetchEventDetails(eventId) {
 async function attendEvent(eventId, token, errorMessageElement) {
   try {
     await fetchApi(
-      `http://localhost:5000/api/events/${eventId}/attend`,
+      `${backendUrl}/api/events/${eventId}/attend`,
       'POST',
       null,
       token
-    ) // Usamos fetchApi
+    ) // Usamos fetchApi con la URL dinámica
 
     showToast('Te has inscrito con éxito al evento', 'success', 'center') // Notificación de éxito
     window.navigateTo(`/events/${eventId}`) // Redirigir a los detalles del evento
@@ -130,11 +131,11 @@ async function createEventDetails(eventId) {
         if (confirm('¿Estás seguro de que deseas eliminar este evento?')) {
           try {
             await fetchApi(
-              `http://localhost:5000/api/events/${eventId}`,
+              `${backendUrl}/api/events/${eventId}`, // Usamos la URL dinámica del backend
               'DELETE',
               null,
               token
-            ) // Usamos fetchApi
+            )
 
             showToast('Evento eliminado exitosamente', 'success', 'center') // Notificación de éxito
             window.navigateTo('/events')
