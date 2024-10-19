@@ -2,7 +2,7 @@ import '../styles/Header.css'
 import { showToast } from '../utils/notification.js'
 import createEventList from '../pages/EventList.js'
 import createUserProfile from '../pages/UserProfile.js'
-import createHome from '../pages/Home.js' // Corrige importación desde Home.js
+import createHome from '../pages/Home.js'
 import createGalleryPage from '../pages/GalleryPage.js'
 
 function createHeader() {
@@ -89,6 +89,8 @@ function createHeader() {
   header.appendChild(hamburgerMenu)
   header.appendChild(userDiv)
 
+  console.log('Header creado:', header) // Añadir este log
+
   return header
 }
 
@@ -123,7 +125,7 @@ async function handleRouting(path) {
       app.appendChild(galleryPage)
     } else if (path === '/') {
       console.log('Cargando página de inicio')
-      const homePage = createHome() // Cambiamos a createHome
+      const homePage = createHome()
       app.appendChild(homePage)
     } else {
       console.log('Cargando 404: Página no encontrada')
