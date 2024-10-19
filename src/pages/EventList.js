@@ -188,11 +188,4 @@ async function createEventList() {
   return container
 }
 
-// Función para cargar los detalles de un evento
-function loadEventDetails(eventId) {
-  // Aquí puedes definir la lógica para cargar los detalles del evento
-  console.log(`Cargando detalles del evento: ${eventId}`)
-  // Podrías realizar otra llamada a `fetchApi` para obtener los detalles del evento
-}
-
 export default createEventList
