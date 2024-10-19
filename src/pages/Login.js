@@ -3,7 +3,7 @@ import { registerUser } from '../services/authService.js'
 import { createForm } from '../components/Form.js' // Importamos el nuevo Form.js
 import { displayError, clearError } from '../utils/errorHandler.js' // Importamos el manejador de errores
 import { showToast } from '../utils/notification.js' // Importamos la función de notificación
-import createHeader from '../components/Header.js' // Importamos la función para crear el Header
+import createHeader from '../sections/Header.js' // Importamos la función para crear el Header
 
 function createRegisterForm() {
   const registerContainer = document.createElement('div')
