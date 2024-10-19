@@ -3,7 +3,6 @@ import { showToast } from '../utils/notification.js' // Importamos la función s
 import createEventList from '../components/EventList.js' // Asegúrate de tener las vistas correctas
 import createUserProfile from '../components/UserProfile.js' // Asegúrate de tener las vistas correctas
 import createHomePage from '../components/HomePage.js' // Si tienes una página de inicio
-import createGalleryPage from '../components/GalleryPage.js' // Asegúrate de que la ruta sea correcta
 
 function createHeader() {
   const header = document.createElement('header')
@@ -21,8 +20,8 @@ function createHeader() {
 
   // Enlaces de navegación
   const homeLink = createNavLink('/', 'Inicio')
-  const eventsLink = createNavLink('/events', 'Eventos', true) // Añadimos el refresh
-  const galleryLink = createNavLink('/gallery', 'Galería', true) // Añadimos el refresh
+  const eventsLink = createNavLink('/events', 'Eventos')
+  const galleryLink = createNavLink('/gallery', 'Galería') // Nuevo enlace a la galería
   nav.appendChild(homeLink)
   nav.appendChild(eventsLink)
   nav.appendChild(galleryLink)
@@ -110,7 +109,7 @@ function createHeader() {
   return header
 }
 
-function createNavLink(href, text, shouldRefresh = false) {
+function createNavLink(href, text) {
   const link = document.createElement('a')
   link.href = href
   link.textContent = text
@@ -120,48 +119,39 @@ function createNavLink(href, text, shouldRefresh = false) {
     // Cambiar la URL sin recargar la página
     window.history.pushState({}, '', href)
 
-    // Si se requiere, forzar el refresh de la página
-    if (shouldRefresh) {
-      window.location.reload() // Refresca la página al hacer clic
-    } else {
-      handleRouting(href)
-    }
+    // Llamar a la función para cargar la nueva vista
+    handleRouting(href)
   })
   return link
 }
 
-async function handleRouting(path) {
+function handleRouting(path) {
   const app = document.getElementById('app-container')
   app.innerHTML = '' // Limpiamos el contenido anterior
 
-  try {
-    if (path === '/events') {
-      console.log('Cargando vista de eventos')
-      const eventList = await createEventList()
+  if (path === '/events') {
+    console.log('Cargando vista de eventos')
+    createEventList().then((eventList) => {
       app.appendChild(eventList)
-    } else if (path === '/profile') {
-      console.log('Cargando perfil del usuario')
-      const userProfile = createUserProfile()
-      app.appendChild(userProfile)
-    } else if (path === '/gallery') {
-      console.log('Cargando galería de eventos')
-      const galleryPage = await createGalleryPage()
+    })
+  } else if (path === '/profile') {
+    console.log('Cargando perfil del usuario')
+    const userProfile = createUserProfile()
+    app.appendChild(userProfile)
+  } else if (path === '/gallery') {
+    console.log('Cargando galería de eventos')
+    createGalleryPage().then((galleryPage) => {
       app.appendChild(galleryPage)
-    } else if (path === '/') {
-      console.log('Cargando página de inicio')
-      const homePage = createHomePage()
-      app.appendChild(homePage)
-    } else {
-      console.log('Cargando 404: Página no encontrada')
-      const notFound = document.createElement('h1')
-      notFound.textContent = '404: Página no encontrada'
-      app.appendChild(notFound)
-    }
-  } catch (error) {
-    console.error(`Error cargando la ruta ${path}:`, error)
-    const errorMessage = document.createElement('p')
-    errorMessage.textContent = `Error al cargar la página ${path}`
-    app.appendChild(errorMessage)
+    })
+  } else if (path === '/') {
+    console.log('Cargando página de inicio')
+    const homePage = createHomePage()
+    app.appendChild(homePage)
+  } else {
+    console.log('Cargando 404: Página no encontrada')
+    const notFound = document.createElement('h1')
+    notFound.textContent = '404: Página no encontrada'
+    app.appendChild(notFound)
   }
 }
 
