@@ -2,7 +2,7 @@ import '../styles/Header.css' // Asegúrate de que la ruta sea correcta
 import { showToast } from '../utils/notification.js' // Importamos la función showToast
 import createEventList from '../components/EventList.js' // Asegúrate de tener las vistas correctas
 import createUserProfile from '../components/UserProfile.js' // Asegúrate de tener las vistas correctas
-import createHomePage from '../components/HomePage.js' // Si tienes una página de inicio
+import createHome from '../pages/Home.js'
 
 function createHeader() {
   const header = document.createElement('header')
@@ -145,7 +145,7 @@ function handleRouting(path) {
     })
   } else if (path === '/') {
     console.log('Cargando página de inicio')
-    const homePage = createHomePage()
+    const homePage = createHome()
     app.appendChild(homePage)
   } else {
     console.log('Cargando 404: Página no encontrada')
@@ -156,7 +156,7 @@ function handleRouting(path) {
 }
 
 // Funciones para cargar páginas (debes asegurarte de que existan)
-function createHomePage() {
+function createHome() {
   const homePage = document.createElement('div')
   const title = document.createElement('h1')
   title.textContent = 'Bienvenido a EventosApp'
