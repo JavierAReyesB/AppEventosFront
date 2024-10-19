@@ -124,7 +124,7 @@ function createNavLink(href, text) {
 
 // Función para manejar la navegación basada en la URL
 function handleRouting(path) {
-  const app = document.getElementById('app') // El contenedor principal de la página
+  const app = document.getElementById('app-container') // El contenedor principal de la página
   app.innerHTML = '' // Limpiamos el contenido anterior
 
   if (path === '/events') {
