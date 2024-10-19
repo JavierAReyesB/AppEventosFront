@@ -1,5 +1,6 @@
 import '../styles/Header.css' // Asegúrate de que la ruta sea correcta
 import { showToast } from '../utils/notification.js' // Importamos la función showToast
+import { createNavLink } from '../utils/navigation.js' // Importamos la nueva función de navegación
 import createEventList from '../pages/EventList.js' // Asegúrate de tener las vistas correctas
 import createUserProfile from '../pages/UserProfile.js' // Asegúrate de tener las vistas correctas
 import createHome from '../pages/Home.js'
@@ -117,22 +118,6 @@ function createHeader() {
   return header
 }
 
-function createNavLink(href, text) {
-  const link = document.createElement('a')
-  link.href = href
-  link.textContent = text
-  link.addEventListener('click', (e) => {
-    e.preventDefault()
-
-    // Cambiar la URL sin recargar la página
-    window.history.pushState({}, '', href)
-
-    // Llamar a la función para cargar la nueva vista
-    handleRouting(href)
-  })
-  return link
-}
-
 function handleRouting(path) {
   const main = document.querySelector('main.custom-main') // Selecciona solo el main, no todo el app-container
   main.innerHTML = '' // Limpiamos el contenido anterior del main
@@ -176,15 +161,6 @@ function handleRouting(path) {
     main.appendChild(notFound)
   }
 }
-
-// Funciones para cargar páginas (debes asegurarte de que existan)
-// function createHome() {
-//   const homePage = document.createElement('div')
-//   const title = document.createElement('h1')
-//   title.textContent = 'Bienvenido a EventosApp'
-//   homePage.appendChild(title)
-//   return homePage
-// }
 
 // Detectar cambios en la URL (cuando el usuario use los botones de adelante/atrás del navegador)
 window.addEventListener('popstate', function () {
