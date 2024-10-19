@@ -5,6 +5,7 @@ import createUserProfile from '../pages/UserProfile.js' // Asegúrate de tener l
 import createHome from '../pages/Home.js'
 import createLoginForm from '../pages/Login.js' // Asegúrate de que la ruta sea correcta
 import createRegisterForm from '../pages/Register.js' // Asegúrate de que la ruta sea correcta
+import createGallery from './pages/Gallery.js' // Asegúrate de importar la función correcta
 
 function createHeader() {
   const header = document.createElement('header')
@@ -142,7 +143,7 @@ function handleRouting(path) {
     main.appendChild(userProfile)
   } else if (path === '/gallery') {
     console.log('Cargando galería de eventos')
-    createGalleryPage().then((galleryPage) => {
+    createGallery().then((galleryPage) => {
       main.appendChild(galleryPage)
     })
   } else if (path === '/') {
