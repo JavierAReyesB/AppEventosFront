@@ -21,24 +21,27 @@ function createHome() {
   bannerText.classList.add('banner-text')
   bannerText.innerHTML = `
     <h1>Bienvenido a EventosApp</h1>
-    <p>Organiza y asiste a los mejores eventos</p>
+    <p>¿Estás listo para ser parte de los mejores eventos? En <strong>EventosApp</strong>, no solo asistes a eventos, ¡los haces tuyos! Conéctate con personas que comparten tus pasiones, encuentra los eventos más emocionantes cerca de ti o crea el tuyo propio y hazlo inolvidable. 🥳</p>
+    <ul>
+      <li>🔸 <strong>Regístrate ahora</strong> para recibir notificaciones personalizadas de los eventos más interesantes.</li>
+      <li>🔸 <strong>Crea y organiza tus propios eventos</strong> para compartir momentos únicos con otros asistentes.</li>
+      <li>🔸 <strong>Descubre</strong> una nueva forma de vivir cada experiencia.</li>
+    </ul>
+    <p>¿Qué esperas? ¡Únete hoy y empieza a disfrutar de la mejor manera de conectar con la diversión, la música, la cultura, y mucho más! 🚀</p>
     <button class="banner-button">Ver Eventos</button>
   `
 
   banner.appendChild(bannerText)
   container.appendChild(banner)
 
-  // Cambiamos el enlace <a> por un botón con un listener
   bannerText
     .querySelector('.banner-button')
     .addEventListener('click', (event) => {
       event.preventDefault()
 
-      // Verificar si ya existe el contenedor de eventos para evitar duplicación
       if (!document.querySelector('.event-list-container')) {
-        // Navegación controlada sin recargar la página completa
         window.history.pushState({}, '', '/events')
-        window.navigateTo('/events') // Esta es la función que controla la navegación en tu app
+        window.navigateTo('/events')
       } else {
         console.log('El contenedor de eventos ya existe, evitando duplicación.')
       }
