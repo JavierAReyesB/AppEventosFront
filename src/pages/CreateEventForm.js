@@ -3,6 +3,7 @@ import fetchApi from '../services/apiService'
 import { createForm } from '../components/Form'
 import { displayError, clearError } from '../utils/errorHandler'
 import { showToast } from '../utils/notification'
+import createLoader from '../components/Loader' // Importamos el loader
 
 const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
 
@@ -51,6 +52,10 @@ function createEventForm() {
   ]
 
   const onSubmit = async (formDataObj) => {
+    // Mostrar el loader al iniciar la creación del evento
+    const loader = createLoader()
+    container.appendChild(loader)
+
     try {
       clearError(errorMessage)
       const token = localStorage.getItem('token')
@@ -87,6 +92,9 @@ function createEventForm() {
         errorMessage,
         'form'
       )
+    } finally {
+      // Remover el loader una vez completado el proceso
+      container.removeChild(loader)
     }
   }
 
