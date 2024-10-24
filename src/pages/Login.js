@@ -1,92 +1,118 @@
-import '../styles/LoginRegister.css'
-import { loginUser } from '../services/authService.js'
-import { createForm } from '../components/Form.js'
-import { displayError, clearError } from '../utils/errorHandler.js'
-import { showToast } from '../utils/notification.js'
-import createLoader from '../components/Loader.js' // Importamos la función del loader
+import '../styles/CreateEventForm.css'
+import fetchApi from '../services/apiService'
+import { createForm } from '../components/Form'
+import { displayError, clearError } from '../utils/errorHandler'
+import { showToast } from '../utils/notification'
+import createLoader from '../components/Loader' // Importamos el loader
 
-function createLoginForm() {
-  const loginContainer = document.createElement('div')
-  loginContainer.classList.add('form-container')
+const backendUrl = import.meta.env.VITE_APP_BACKEND_URL
 
-  const loader = createLoader() // Creamos el loader
-  loginContainer.appendChild(loader) // Mostramos el loader mientras cargamos el formulario
+function createEventForm() {
+  const container = document.createElement('div')
+  container.classList.add('create-event-container')
+
+  // Mostrar el loader inmediatamente cuando se carga la página
+  const loader = createLoader()
+  container.appendChild(loader)
 
   setTimeout(() => {
-    // Simulamos un pequeño retraso para mostrar el loader, si es necesario
-    loginContainer.innerHTML = '' // Limpiamos el loader antes de cargar el formulario
+    // Limpiamos el loader antes de cargar el formulario
+    container.innerHTML = ''
 
     const title = document.createElement('h1')
-    title.textContent = 'Iniciar Sesión'
-    loginContainer.appendChild(title)
+    title.textContent = 'Crear Nuevo Evento'
+    container.appendChild(title)
 
-    const errorMessage = document.createElement('p')
+    const errorMessage = document.createElement('div')
     errorMessage.classList.add('error-message')
-    loginContainer.appendChild(errorMessage)
+    container.appendChild(errorMessage)
 
     const fields = [
       {
-        type: 'email',
-        name: 'email',
-        label: 'Correo Electrónico',
-        placeholder: 'Correo Electrónico',
-        isRequired: true
+        type: 'text',
+        name: 'title',
+        label: 'Título del Evento',
+        placeholder: 'Ingresa el título del evento'
       },
       {
-        type: 'password',
-        name: 'password',
-        label: 'Contraseña',
-        placeholder: 'Contraseña',
-        isRequired: true
+        type: 'date',
+        name: 'date',
+        label: 'Fecha del Evento'
       },
       {
-        type: 'checkbox',
-        name: 'rememberMe',
-        label: 'Recordar sesión',
-        isRequired: false
+        type: 'text',
+        name: 'location',
+        label: 'Ubicación del Evento',
+        placeholder: 'Ingresa la ubicación del evento'
+      },
+      {
+        type: 'textarea',
+        name: 'description',
+        label: 'Descripción del Evento',
+        placeholder: 'Escribe una breve descripción del evento'
+      },
+      {
+        type: 'file',
+        name: 'poster',
+        label: 'Poster del Evento',
+        accept: 'image/*'
       }
     ]
 
-    const form = createForm(
-      fields,
-      async (formData) => {
+    const onSubmit = async (formDataObj) => {
+      // Mostrar el loader mientras se crea el evento
+      const submitLoader = createLoader()
+      container.appendChild(submitLoader)
+
+      try {
         clearError(errorMessage)
+        const token = localStorage.getItem('token')
 
-        try {
-          const response = await loginUser(formData)
-          showToast(
-            'Inicio de sesión exitoso. ¡Bienvenido!',
-            'success',
-            'center'
-          )
+        const formData = new FormData()
+        Object.entries(formDataObj).forEach(([key, value]) => {
+          if (key === 'poster' && value.files && value.files.length > 0) {
+            formData.append(key, value.files[0])
+          } else {
+            formData.append(key, value)
+          }
+        })
 
-          const storage = formData.rememberMe ? localStorage : sessionStorage
-          storage.setItem('token', response.token)
+        await fetchApi(
+          `${backendUrl}/api/events`,
+          'POST',
+          formData,
+          token,
+          true
+        )
 
-          setTimeout(() => {
-            window.location.href = '/profile'
-          }, 1000)
-        } catch (error) {
-          displayError(
-            'Error en el inicio de sesión. Verifica tus credenciales.',
-            errorMessage,
-            'form'
-          )
-          showToast(
-            'Error al iniciar sesión. Intente de nuevo.',
-            'error',
-            'center'
-          )
-        }
-      },
-      'login-form',
-      'Iniciar Sesión'
-    )
+        showToast('Evento creado con éxito!', 'success', 'center')
 
-    loginContainer.appendChild(form) // Añadimos el formulario después de haber limpiado el loader
-  }, 500) // Puedes ajustar el tiempo de carga para que el loader se vea, o eliminar el delay si no es necesario
+        setTimeout(() => {
+          window.navigateTo('/events')
+        }, 1000)
+      } catch (error) {
+        console.error('Error al crear el evento:', error)
+        showToast(
+          'Error al crear el evento. Intente de nuevo.',
+          'error',
+          'center'
+        )
+        displayError(
+          `No se pudo crear el evento: ${error.message}`,
+          errorMessage,
+          'form'
+        )
+      } finally {
+        // Remover el loader cuando finalice el proceso
+        container.removeChild(submitLoader)
+      }
+    }
 
-  return loginContainer
+    const form = createForm(fields, onSubmit, 'event-form', 'Crear Evento')
+    container.appendChild(form)
+  }, 500) // Puedes ajustar el tiempo de carga o eliminar el delay si no es necesario
+
+  return container
 }
 
-export default createLoginForm
+export default createEventForm
