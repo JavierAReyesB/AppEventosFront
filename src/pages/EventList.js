@@ -95,16 +95,14 @@ async function fetchEvents() {
 }
 
 async function createEventList() {
-  // Verificar si ya existe un contenedor de eventos antes de crearlo
-  let container = document.querySelector('.event-list-container')
-
-  // Si ya existe, eliminar el contenedor para evitar duplicaciones
-  if (container) {
-    container.remove()
+  // Eliminar cualquier contenedor de eventos existente
+  const existingContainer = document.querySelector('.event-list-container')
+  if (existingContainer) {
+    existingContainer.remove()
   }
 
   // Crear un nuevo contenedor de eventos
-  container = document.createElement('div')
+  const container = document.createElement('div')
   container.classList.add('event-list-container')
 
   const title = document.createElement('h1')
@@ -155,12 +153,12 @@ async function createEventList() {
   })
 
   const renderEvents = (filteredEvents) => {
-    // Limpiar el contenedor de eventos antes de renderizar los nuevos eventos
+    // Limpiar el contenedor de eventos ANTES de renderizar nuevos eventos
     eventList.innerHTML = ''
     if (filteredEvents.length === 0) {
       const emptyMessage = document.createElement('p')
       emptyMessage.textContent = 'No hay eventos disponibles en este momento.'
-      eventList.appendChild(emptyMessage) // Se debe añadir al eventList, no al container
+      eventList.appendChild(emptyMessage)
     } else {
       filteredEvents.forEach((event) => {
         const card = createCard(event)
@@ -192,6 +190,7 @@ async function createEventList() {
       selectedSortOrder === 'asc'
     )
 
+    // Renderizar los eventos filtrados y limpiar antes de agregar nuevos
     renderEvents(filteredEvents)
   }
 
@@ -199,12 +198,14 @@ async function createEventList() {
   locationSelect.addEventListener('change', applyFilters)
   dateSortSelect.addEventListener('change', applyFilters)
 
+  // Renderizar todos los eventos al cargar la página
   renderEvents(events)
 
   container.appendChild(eventList)
 
-  // Insertar el contenedor en el DOM
+  // Insertar el contenedor de eventos en el DOM
   document.body.appendChild(container)
+
   return container
 }
 
