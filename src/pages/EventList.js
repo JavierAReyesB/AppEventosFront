@@ -95,7 +95,17 @@ async function fetchEvents() {
 }
 
 async function createEventList() {
-  const container = document.createElement('div')
+  // Verificar si ya existe un contenedor de eventos antes de crearlo
+  let container = document.querySelector('.event-list-container')
+
+  // Si ya existe, retornamos el contenedor existente para evitar duplicaciones
+  if (container) {
+    console.log('El contenedor de eventos ya existe, evitando duplicación.')
+    return container
+  }
+
+  // Si no existe, lo creamos
+  container = document.createElement('div')
   container.classList.add('event-list-container')
 
   const title = document.createElement('h1')
