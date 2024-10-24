@@ -8,6 +8,11 @@ export function showToast(
   position = 'center',
   duration = 3000
 ) {
+  // Eliminar notificaciones anteriores si existen
+  const existingNotifications = document.querySelectorAll('.toastify')
+  existingNotifications.forEach((notification) => notification.remove())
+
+  // Mostrar la nueva notificación
   Toastify({
     text: message,
     duration: duration,
