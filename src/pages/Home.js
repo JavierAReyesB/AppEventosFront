@@ -22,11 +22,27 @@ function createHome() {
   bannerText.innerHTML = `
     <h1>Bienvenido a EventosApp</h1>
     <p>Organiza y asiste a los mejores eventos</p>
-    <a href="/events" class="banner-button">Ver Eventos</a>
+    <button class="banner-button">Ver Eventos</button>
   `
 
   banner.appendChild(bannerText)
   container.appendChild(banner)
+
+  // Cambiamos el enlace <a> por un botón con un listener
+  bannerText
+    .querySelector('.banner-button')
+    .addEventListener('click', (event) => {
+      event.preventDefault()
+
+      // Verificar si ya existe el contenedor de eventos para evitar duplicación
+      if (!document.querySelector('.event-list-container')) {
+        // Navegación controlada sin recargar la página completa
+        window.history.pushState({}, '', '/events')
+        window.navigateTo('/events') // Esta es la función que controla la navegación en tu app
+      } else {
+        console.log('El contenedor de eventos ya existe, evitando duplicación.')
+      }
+    })
 
   return container
 }
