@@ -98,13 +98,12 @@ async function createEventList() {
   // Verificar si ya existe un contenedor de eventos antes de crearlo
   let container = document.querySelector('.event-list-container')
 
-  // Si ya existe, retornamos el contenedor existente para evitar duplicaciones
+  // Si ya existe, eliminar el contenedor para evitar duplicaciones
   if (container) {
-    console.log('El contenedor de eventos ya existe, evitando duplicación.')
-    return container
+    container.remove()
   }
 
-  // Si no existe, lo creamos
+  // Crear un nuevo contenedor de eventos
   container = document.createElement('div')
   container.classList.add('event-list-container')
 
@@ -156,11 +155,12 @@ async function createEventList() {
   })
 
   const renderEvents = (filteredEvents) => {
+    // Limpiar el contenedor de eventos antes de renderizar los nuevos eventos
     eventList.innerHTML = ''
     if (filteredEvents.length === 0) {
       const emptyMessage = document.createElement('p')
       emptyMessage.textContent = 'No hay eventos disponibles en este momento.'
-      container.appendChild(emptyMessage)
+      eventList.appendChild(emptyMessage) // Se debe añadir al eventList, no al container
     } else {
       filteredEvents.forEach((event) => {
         const card = createCard(event)
@@ -202,6 +202,9 @@ async function createEventList() {
   renderEvents(events)
 
   container.appendChild(eventList)
+
+  // Insertar el contenedor en el DOM
+  document.body.appendChild(container)
   return container
 }
 
